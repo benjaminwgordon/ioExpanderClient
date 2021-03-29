@@ -1,7 +1,9 @@
-import React, {useState} from 'react'
-import query from '../query'
+import React, {useState, useContext} from 'react'
+import {post} from '../query'
+import authenticationContext from '../authenticationContext'
+const Login = (props) => {
 
-const Login = () => {
+    const user = useContext(authenticationContext)
 
     const [username, setUsername] = useState("")
     const [email, setEmail] = useState("")
@@ -10,8 +12,10 @@ const Login = () => {
     const handleLoginSubmit = async (e) => {
         e.preventDefault()
         setPassword("")
-        const res = await query("/auth/login", "POST", {username, email, password})
-        
+        const res = await post("/auth/login", {username, email, password})
+        if (res.token){
+            user.updateUser(username, res.user_id, res.token)
+        }
     }
 
     return (
