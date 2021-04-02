@@ -1,6 +1,7 @@
 import React, {useContext, useEffect, useState} from 'react'
-import {get} from '../query'
+import query from '../query'
 import authenticationContext from '../authenticationContext'
+
 const Profile = (props) => {
 
     const signedInUser = useContext(authenticationContext)
@@ -10,7 +11,7 @@ const Profile = (props) => {
 
     useEffect(()=>{
         const fetchData = async () => {
-            return await get(`/users/${targetUserUsername}`, signedInUser.user.token)
+            return await query.get(`/users/${targetUserUsername}`, signedInUser.user.token)
         }
         fetchData()
             .then(res=>{

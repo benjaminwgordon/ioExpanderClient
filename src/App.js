@@ -3,8 +3,9 @@ import React from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom'
 
 import AuthenticationContextWrapper from './AuthenticationContextWrapper'
-import Profile from './Pages/Profile'
 import Navbar from './Components/Navbar'
+import Profile from './Pages/Profile'
+import Projects from './Pages/Projects'
 
 function App() {
   return (
@@ -23,7 +24,7 @@ function App() {
           </Route>
           
           <Route path="/projects">
-            projects
+            <Projects />
           </Route>
 
           <Route exact path="/">
