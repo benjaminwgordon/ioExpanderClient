@@ -29,6 +29,10 @@ const Projects = () => {
     const updateProjects = (newProject) => {
         setProjects([...projects, newProject])
     }
+
+    const selectProject = (projectId) => {
+        setTargetProjectId(projectId)
+    }
     
     return (
         <div style={{display:"flex", flexDirection:"row"}}>
@@ -47,6 +51,7 @@ const Projects = () => {
                                     project_id={project.project_id}
                                     project_name={project.project_name}
                                     key={project.project_id}
+                                    selectProject={selectProject}
                                 />
                             )
                         })}

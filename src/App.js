@@ -1,4 +1,4 @@
-import Login from './Pages/Login'
+import Auth from './Pages/Auth'
 import React from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom'
 
@@ -15,11 +15,11 @@ function App() {
           <Navbar />
 
           <Route path="/login">
-            <Login/>
+            <Auth />
           </Route>
           
           
-          <Route path="/users">
+          <Route path="/users/:id?">
             <Profile targetUserUsername="test"/>
           </Route>
           

@@ -3,6 +3,8 @@ import query from '../query'
 import authenticationContext from '../authenticationContext'
 const Login = (props) => {
 
+    const {toggleLoginRegister} = props
+
     const user = useContext(authenticationContext)
 
     const [email, setEmail] = useState("")
@@ -23,8 +25,8 @@ const Login = (props) => {
                 Email: <input type="email" name="email" value={email} onChange={e => setEmail(e.target.value)}/><br/>
                 Password: <input type="password" name="password" value={password} onChange={e => setPassword(e.target.value)}/><br/>
                 <button type="submit">Submit</button><br/>
-                <button action="swapToRegistration()">Don't have an account?</button>
             </form>
+            <button onClick={toggleLoginRegister}>Don't have an account?</button>
         </div>
     )
 }

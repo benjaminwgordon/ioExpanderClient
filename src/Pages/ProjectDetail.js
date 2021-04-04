@@ -15,7 +15,7 @@ const ProjectDetail = (props) => {
             setProjectData(res.project)
         }
         fetchProject()
-    },[])
+    },[projectId, token])
 
     return (
             !projectData ? 
