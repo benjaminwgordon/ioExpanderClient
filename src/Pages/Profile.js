@@ -3,12 +3,14 @@ import query from '../query'
 import authenticationContext from '../authenticationContext'
 import {useParams} from 'react-router-dom'
 
-const Profile = (props) => {
+const Profile = () => {
 
     const token = useContext(authenticationContext).user.token
     const user_id = useContext(authenticationContext).user.user_id
 
+    console.log({params:useParams()})
     let targetUserId = useParams().id
+    console.log({targetUserId})
     if (!targetUserId){
         targetUserId = user_id
     }
