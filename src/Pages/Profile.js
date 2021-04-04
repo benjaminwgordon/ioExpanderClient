@@ -7,8 +7,8 @@ const Profile = (props) => {
 
     const token = useContext(authenticationContext).user.token
     const user_id = useContext(authenticationContext).user.user_id
-    console.log({token})
-    let {targetUserId} = useParams()
+
+    let targetUserId = useParams().id
     if (!targetUserId){
         targetUserId = user_id
     }
