@@ -4,9 +4,9 @@ import authenticationContext from '../authenticationContext'
 
 const Navbar = () => {
 
-    const {user, updateUser} = useContext(authenticationContext)
+    const authContext = useContext(authenticationContext)
     const logout = () => {
-        updateUser({
+        authContext.updateUser({
             username:null,
             user_id:null,
             token:null}
@@ -18,7 +18,7 @@ const Navbar = () => {
             <nav>
                 <ul>
                     <li>
-                        <Link to="/">Home</Link>
+                        <Link to="/home">Home</Link>
                     </li>
                     <li>
                         <Link to="/users">Users</Link>
@@ -27,7 +27,7 @@ const Navbar = () => {
                         <Link to="/projects">Projects</Link>
                     </li>
 
-                    {user.token && 
+                    {authContext.user.token && 
                         <li>
                             <button onClick={logout}>Log Out</button>
                         </li>
