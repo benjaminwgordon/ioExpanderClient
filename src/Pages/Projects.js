@@ -11,10 +11,16 @@ const Projects = () => {
     const [targetProjectId, setTargetProjectId] = useState(null)
     const [projects, setProjects] = useState([])
     const [showCreateForm, setShowCreateForm] = useState(false)
+    const [error, setError] = useState(true)
 
     useEffect(()=>{
         const fetchProjects = async () => {
             const res = await query.get('/projects', token)
+            if (res.error){
+                setError(true)
+                return
+            }
+            setError(false)
             setProjects(res.projects)
             console.log(res.projects)
             setTargetProjectId(res.projects[0].project_id)
@@ -28,6 +34,8 @@ const Projects = () => {
 
     const updateProjects = (newProject) => {
         setProjects([...projects, newProject])
+        setShowCreateForm(false)
+        setError(false)
     }
 
     const selectProject = (projectId) => {
@@ -41,8 +49,13 @@ const Projects = () => {
                 { showCreateForm &&
                     <NewProjectForm onSuccess={newProject => updateProjects(newProject)} onFailure={()=>{}}/>
                 }
+                <h2>Top Projects</h2>
                 {
-                    (projects.length > 0) && 
+                    error 
+                    ?<div>
+                        <p>Error finding Projects</p>
+                    </div> 
+                    : projects.length > 0 &&
                     <ul>
                         {projects.map(project => {
                             return(

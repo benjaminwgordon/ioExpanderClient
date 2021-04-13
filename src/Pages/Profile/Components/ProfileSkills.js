@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useContext} from 'react'
-import authenticationContext from '../../authenticationContext'
-import query from '../../query'
+import authenticationContext from '../../../authenticationContext'
+import query from '../../../query'
 import ProfileSkillsDetails from './ProfileSkillsDetails'
 import ProfileSkillsEdit from './ProfileSkillsEdit'
 

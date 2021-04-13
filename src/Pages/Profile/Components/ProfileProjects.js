@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useContext} from 'react'
-import authenticationContext from '../../authenticationContext'
-import query from '../../query'
+import authenticationContext from '../../../authenticationContext'
+import query from '../../../query'
 
 const ProfileProjects = (props) => {
 
@@ -19,6 +19,7 @@ const ProfileProjects = (props) => {
 
     return (
         <div>
+            <h3>Projects</h3>
             {
                 projects
                 && projects.map(project => {

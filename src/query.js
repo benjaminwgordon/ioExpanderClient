@@ -9,6 +9,7 @@ const get = async (target, token) => {
             }
         }
     )
+    if (!res.ok){return({error:res.status})}
     const resJson =  await res.json()
     console.log("res:", resJson)
     return resJson
@@ -27,7 +28,8 @@ const post = async (target, body, token) => {
                 }
             }
         )
-        
+        if (!res.ok){return({error:res.status})}
+
         const resJson =  await res.json()
         console.log("res:", resJson)
         return resJson
@@ -48,7 +50,8 @@ const deleteRequest = async (target, token) => {
                 }
             }
         )
-        
+        if (!res.ok){return({error:res.status})}
+
         const resJson =  await res.json()
         console.log("res:", resJson)
         return resJson

@@ -3,8 +3,8 @@ import query from '../../query'
 import authenticationContext from '../../authenticationContext'
 import {useParams} from 'react-router-dom'
 
-import ProfileSkills from './ProfileSkills'
-import ProfileProjects from './ProfileProjects'
+import ProfileSkills from './Components/ProfileSkills'
+import ProfileProjects from './Components/ProfileProjects'
 
 const Profile = () => {
 
@@ -35,12 +35,13 @@ const Profile = () => {
     }, [token, targetUserId, user_id])
 
     return (
+        targetUserData &&
         <div>
-                targetUserData &&
-                <ProfileSkills targetUserData={targetUserData} targetUserId={targetUserId} isOwnedProfile={isOwnedProfile} />
-                <ProfileProjects targetUserData={targetUserData} targetUserId={targetUserId} isOwnedProfile={isOwnedProfile} />
+            <ProfileSkills targetUserData={targetUserData} targetUserId={targetUserId} isOwnedProfile={isOwnedProfile} />
+            <ProfileProjects targetUserData={targetUserData} targetUserId={targetUserId} isOwnedProfile={isOwnedProfile} />
         </div>
     )
 }
 
 export default Profile
+ 
