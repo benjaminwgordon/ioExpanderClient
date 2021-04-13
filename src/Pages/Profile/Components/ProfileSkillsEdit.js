@@ -8,8 +8,9 @@ const ProfileSkillsEdit = (props) => {
     const token = useContext(authenticationContext).user.token
     const user_id = useContext(authenticationContext).user.user_id
     const [newSkillTechnologyName, setNewSkillTechnologyName] = useState("")
-    const [NewSkillTechnologyNameRecommendation, setNewSkillTechnologyNameRecommendation] = useState(null)
+    const [NewSkillTechnologyNameRecommendation, setNewSkillTechnologyNameRecommendation] = useState("")
     const [newSkillRating, setNewSkillRating] = useState(0)
+    const [message, setMessage] = useState("")
 
     const deleteSkill = async (deletedSkill) => {
         const res = await query.deleteRequest(`/users/${targetUserId}/skills/${deletedSkill.skill_id}`, token)
@@ -22,13 +23,16 @@ const ProfileSkillsEdit = (props) => {
         setNewSkillRating(Math.max(0, Math.min(rating, 5)))
     }
 
-    const selectNameRecommendation = (name) => {
-        setNewSkillTechnologyName(name)
-    }
-
     const handleNewSkillSubmit = async () => {
-        const res = await query.post(`/users/${user_id}/skills`, {technology_id: newSkillTechnologyName, technology_rating: newSkillRating}, token)
-        console.log(res)
+        const res = await query.post(`/users/${user_id}/skills`, {technology_name: newSkillTechnologyName, technology_rating: newSkillRating}, token)
+        if (res.error){
+            setMessage("You already have this skill")
+            return
+        }
+        setMessage("")
+        setSkills([...skills, res.insertedSkillDetails])
+        setNewSkillTechnologyName("")
+        setNewSkillRating(0)
     }
 
     useEffect(() => {
@@ -47,9 +51,9 @@ const ProfileSkillsEdit = (props) => {
                 skills &&
                 skills.map(skill => {
                         return(
-                            <div>
+                            <div key={skill.technology_name + skill.technology_rating}>
                                 <span>{skill.technology_name}</span>
-                                <span> : {skill.rating}</span>
+                                <span> : {skill.technology_rating}</span>
                                 <button onClick={() => deleteSkill(skill)}>Delete</button>
                             </div>
                         )
@@ -59,9 +63,11 @@ const ProfileSkillsEdit = (props) => {
             <input type="text" value={newSkillTechnologyName} onChange={(e)=>{setNewSkillTechnologyName(e.target.value)}} />
             <input type="number" value={newSkillRating} onChange={(e) => {handleChangeNewSkillRating(e.target.value)}} />
             <button onClick={handleNewSkillSubmit}>Submit</button>
+            <br/>
             {
                 NewSkillTechnologyNameRecommendation &&
-                <select value="" onChange={(e) => selectNameRecommendation(e.target.value)}>
+                <select value={newSkillTechnologyName} onChange={(e) => setNewSkillTechnologyName(e.target.value)}>
+                    <option value={newSkillTechnologyName}>{newSkillTechnologyName}</option>
                     {
                         NewSkillTechnologyNameRecommendation.map(recommendation => {
                             return (
@@ -71,6 +77,9 @@ const ProfileSkillsEdit = (props) => {
                     }
                 </select>
             } 
+            {message && 
+                <p>{message}</p>
+            }
         </div>
     )
 }

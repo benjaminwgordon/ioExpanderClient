@@ -24,7 +24,7 @@ const ProfileProjects = (props) => {
                 projects
                 && projects.map(project => {
                     return(
-                        <div>
+                        <div key={project.project_name}>
                             <h4>{project.project_name}</h4>
                         </div>
                     )

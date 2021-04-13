@@ -12,7 +12,7 @@ const ProfileSkillsDetails = (props) => {
                     return(
                         <div>
                             <span>{skill.technology_name}</span>
-                            <span> : {skill.rating}</span>
+                            <span> : {skill.technology_rating}</span>
                         </div>
                     )
                 })
