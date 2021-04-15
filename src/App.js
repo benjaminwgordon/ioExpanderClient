@@ -14,7 +14,8 @@ function App() {
       <Router>
         <AuthenticationContextWrapper>
           
-          <Navbar />
+          {/* only render navbar when not on login */}
+          <Navbar /> 
           <Switch>
             <ProtectedRoute path="/users/:id?" component={Profile} />
             <ProtectedRoute path="/projects" component={Projects} />

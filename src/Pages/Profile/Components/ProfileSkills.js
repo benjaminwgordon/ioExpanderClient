@@ -28,6 +28,7 @@ const ProfileSkills = (props) => {
 
     return (
         <div>
+            <h3>Skills</h3>
             {
                 props.isOwnedProfile && <button onClick={toggleEditMode}>Edit Skills</button>
             }

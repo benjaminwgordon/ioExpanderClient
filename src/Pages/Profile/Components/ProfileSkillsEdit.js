@@ -38,7 +38,9 @@ const ProfileSkillsEdit = (props) => {
     useEffect(() => {
         const fetchTechnologies = async () => {
             const res = await query.get(`/technologies?startsWith=${newSkillTechnologyName}`, token)
-            setNewSkillTechnologyNameRecommendation(res.technologies)
+            if (!res.error){
+                setNewSkillTechnologyNameRecommendation(res.technologies)
+            }
         }
         if (newSkillTechnologyName.length > 0){
             fetchTechnologies()
@@ -49,7 +51,7 @@ const ProfileSkillsEdit = (props) => {
         <div>
             {
                 skills &&
-                skills.map(skill => {
+                skills.sort((a,b) => b.technology_rating - a.technology_rating).map(skill => {
                         return(
                             <div key={skill.technology_name + skill.technology_rating}>
                                 <span>{skill.technology_name}</span>

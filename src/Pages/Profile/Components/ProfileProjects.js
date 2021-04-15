@@ -1,13 +1,15 @@
 import React, {useState, useEffect, useContext} from 'react'
 import authenticationContext from '../../../authenticationContext'
+import NewProjectForm from '../../../Components/NewProjectForm'
 import query from '../../../query'
 
 const ProfileProjects = (props) => {
 
     const token = useContext(authenticationContext).user.token
 
-    const {targetUserId} = props
+    const {targetUserId, isOwnedProfile} = props
     const [projects, setProjects] = useState(null)
+    const [showAddProject, setShowAddProject] = useState(false)
 
     useEffect(() => {
         const fetchProjects = async () => {
@@ -20,6 +22,13 @@ const ProfileProjects = (props) => {
     return (
         <div>
             <h3>Projects</h3>
+            {
+                isOwnedProfile &&
+                <button onClick={() => setShowAddProject(!showAddProject)}>Add Project</button>
+            }
+            {
+                showAddProject && <NewProjectForm />
+            }
             {
                 projects
                 && projects.map(project => {
