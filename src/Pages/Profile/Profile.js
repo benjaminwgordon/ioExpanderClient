@@ -37,7 +37,7 @@ const Profile = () => {
 
     return (
         targetUserData &&
-        <div className="min-h-screen w-full divide-y-2">
+        <div className="min-h-screen w-full divide-y-2 relative">
             <ProfileSection>
                 <ProfileSkills targetUserData={targetUserData} targetUserId={targetUserId} isOwnedProfile={isOwnedProfile} />
             </ProfileSection>

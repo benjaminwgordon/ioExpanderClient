@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext} from 'react'
 import authenticationContext from '../../../authenticationContext'
 import query from '../../../query'
+import { PlusIcon, MinusIcon, XIcon } from '@heroicons/react/outline'
 
 const ProfileSkillsEdit = (props) => {
 
@@ -53,10 +54,27 @@ const ProfileSkillsEdit = (props) => {
                 skills &&
                 skills.sort((a,b) => b.technology_rating - a.technology_rating).map(skill => {
                         return(
-                            <div key={skill.technology_name + skill.technology_rating}>
-                                <span>{skill.technology_name}</span>
-                                <span> : {skill.technology_rating}</span>
-                                <button onClick={() => deleteSkill(skill)}>Delete</button>
+                            <div key={skill.technology_name + skill.technology_rating} className="px-3">
+                                <div className="flex flex-row justify-between">
+                                    <div>
+                                        <span>{skill.technology_name}</span>
+                                        <span>{" : "}</span>
+                                        <span>{skill.technology_rating}</span>
+                                    </div>
+                                    <div className="flex flex-row">
+                                        {/* Leaving in case I decide to allow updating existing skills dynamically */}
+                                        
+                                        {/* <button onClick={() => handleChangeNewSkillRating(newSkillRating - 1)}>
+                                            <MinusIcon className="w-8 h-8 bg-red-200 rounded-md p-1" />
+                                        </button>
+                                        <button onClick={() => handleChangeNewSkillRating(newSkillRating + 1)}>
+                                            <PlusIcon className="w-8 h-8 bg-green-200 rounded-md p-1" />
+                                        </button> */}
+                                        <button onClick={() => deleteSkill(skill)}>
+                                            <XIcon className="w-8 h-8 bg-red-400 rounded-md p-1 text-white" />
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         )
                     }
