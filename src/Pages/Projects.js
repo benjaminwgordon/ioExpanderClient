@@ -12,6 +12,8 @@ const Projects = () => {
     const [projects, setProjects] = useState([])
     const [showCreateForm, setShowCreateForm] = useState(false)
     const [error, setError] = useState(true)
+    const [showDetails, setShowDetails] = useState(false)
+
 
     useEffect(()=>{
         const fetchProjects = async () => {
@@ -40,38 +42,52 @@ const Projects = () => {
 
     const selectProject = (projectId) => {
         setTargetProjectId(projectId)
+        setShowDetails(true)
     }
     
     return (
-        <div style={{display:"flex", flexDirection:"row"}}>
-            <div>
-                <button onClick={toggleShowCreateForm}>Create New Project</button>
-                { showCreateForm &&
-                    <NewProjectForm onSuccess={newProject => updateProjects(newProject)} onFailure={()=>{}}/>
-                }
-                <h2>Top Projects</h2>
-                {
-                    error 
-                    ?<div>
-                        <p>Error finding Projects</p>
-                    </div> 
-                    : projects.length > 0 &&
-                    <ul>
-                        {projects.map(project => {
-                            return(
-                                <Project 
-                                    project_description={project.project_description}
-                                    project_id={project.project_id}
-                                    project_name={project.project_name}
-                                    key={project.project_id}
-                                    selectProject={selectProject}
-                                />
-                            )
-                        })}
-                    </ul>
-                }
+        <div className="min-h-screen justify-center bg-gray-100">
+            <div className="max-w-md w-full relative">
+                <div className="text-center">
+                    <button onClick={toggleShowCreateForm}>Create New Project</button>
+                        { showCreateForm &&
+                            <NewProjectForm onSuccess={newProject => updateProjects(newProject)} onFailure={()=>{}}/>
+                        }
+                    <h2>Top Projects</h2>
+                </div>   
+                <div className="flex justify-center bg-gray-100 py-6 px-0 lg:px-8">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-1 justify-evenly w-full">
+                        <div className="flex flex-col">
+                            {
+                                error 
+                                ?<div>
+                                    <p>Error finding Projects</p>
+                                </div> 
+                                : projects.length > 0 &&
+                                <ul className="rounded-sm border shadow-md divide-y-2 bg-white">
+                                    {projects.map(project => {
+                                        return(
+                                            <Project
+                                                project_description={project.project_description}
+                                                project_id={project.project_id}
+                                                project_name={project.project_name}
+                                                key={project.project_id}
+                                                selectProject={selectProject}
+                                            />
+                                        )
+                                    })}
+                                </ul>
+                            }
+                        </div>
+                        {
+                            showDetails &&
+                            <div className="absolute top-0 left-0 bg-gray-100 w-full min-h-screen lg:relative">
+                                { targetProjectId && <ProjectDetail projectId={targetProjectId} close={() => {setShowDetails(false)}} />}
+                            </div>
+                        }
+                    </div>
+                </div>
             </div>
-            { targetProjectId && <ProjectDetail projectId={targetProjectId}/>}
         </div>
     )
 }

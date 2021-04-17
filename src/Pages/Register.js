@@ -11,11 +11,17 @@ const Register = (props) => {
     const [username, setUsername] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [error, setError] = useState("")
 
     const handleRegisterSubmit = async (e) => {
         e.preventDefault()
         setPassword("")
         const res = await query.post("/auth/register", {username, email, password})
+        if (res.error = 409){
+            setError("Credentials already in use")
+        } else{
+            setError("")
+        }
         if (res.token){
             user.updateUser(username, res.user_id, res.token)
         }
@@ -78,6 +84,13 @@ const Register = (props) => {
                 <button type="submit" className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                     Submit
                 </button>
+                
+                {
+                    error && 
+                    <p className="text-red-500">
+                        {error}
+                    </p>
+                }
             </form>
             </div>
         </div>

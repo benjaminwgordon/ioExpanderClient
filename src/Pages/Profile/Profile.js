@@ -5,6 +5,7 @@ import {useParams} from 'react-router-dom'
 
 import ProfileSkills from './Components/ProfileSkills'
 import ProfileProjects from './Components/ProfileProjects'
+import ProfileSection from './Components/ProfileSection'
 
 const Profile = () => {
 
@@ -36,9 +37,13 @@ const Profile = () => {
 
     return (
         targetUserData &&
-        <div>
-            <ProfileSkills targetUserData={targetUserData} targetUserId={targetUserId} isOwnedProfile={isOwnedProfile} />
-            <ProfileProjects targetUserData={targetUserData} targetUserId={targetUserId} isOwnedProfile={isOwnedProfile} />
+        <div className="min-h-screen w-full divide-y-2">
+            <ProfileSection>
+                <ProfileSkills targetUserData={targetUserData} targetUserId={targetUserId} isOwnedProfile={isOwnedProfile} />
+            </ProfileSection>
+            <ProfileSection>
+                <ProfileProjects targetUserData={targetUserData} targetUserId={targetUserId} isOwnedProfile={isOwnedProfile} />
+            </ProfileSection>
         </div>
     )
 }

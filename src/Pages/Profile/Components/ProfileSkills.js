@@ -1,3 +1,4 @@
+import { PencilIcon } from '@heroicons/react/outline'
 import React, {useState, useEffect, useContext} from 'react'
 import authenticationContext from '../../../authenticationContext'
 import query from '../../../query'
@@ -27,17 +28,23 @@ const ProfileSkills = (props) => {
     
 
     return (
-        <div>
-            <h3>Skills</h3>
-            {
-                props.isOwnedProfile && <button onClick={toggleEditMode}>Edit Skills</button>
-            }
-            {
-                isEditMode 
-                ? <ProfileSkillsEdit skills={skills} setSkills={setSkills} targetUserId={targetUserId}/>
-                : <ProfileSkillsDetails skills={skills}  targetUserId={targetUserId} />
-            }
-            
+        <div className="py-2">
+            <div className="flex justify-between">
+                <h3 className="font-extrabold text-xl">Skills</h3>
+                {
+                    props.isOwnedProfile && 
+                    <button onClick={toggleEditMode}>
+                        <PencilIcon className="block h-6 w-6"/>
+                    </button>
+                }
+            </div>
+            <div>
+                {
+                    isEditMode 
+                    ? <ProfileSkillsEdit skills={skills} setSkills={setSkills} targetUserId={targetUserId}/>
+                    : <ProfileSkillsDetails skills={skills}  targetUserId={targetUserId} />
+                }
+            </div>
         </div>
     )
 }

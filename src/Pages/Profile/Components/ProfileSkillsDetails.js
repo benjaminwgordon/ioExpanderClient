@@ -10,7 +10,7 @@ const ProfileSkillsDetails = (props) => {
             skills &&
             skills.map(skill => {
                     return(
-                        <div>
+                        <div className="px-3">
                             <span>{skill.technology_name}</span>
                             <span> : {skill.technology_rating}</span>
                         </div>
