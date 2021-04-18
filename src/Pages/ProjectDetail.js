@@ -22,14 +22,6 @@ const ProjectDetail = (props) => {
             !projectData ? 
             <p>Loading...</p> : 
             <div className="min-h-screen w-full bg-white shadow-md">
-                <div className="px-6 py-2 border-b flex justify-between lg:invisible lg:py-0">
-                    <button onClick={close} >
-                        <XIcon className="block h-6 w-6" aria-hidden="true" />
-                    </button>
-                    <button>
-                        <DotsHorizontalIcon className="block h-6 w-6" aria-hidden="true" />
-                    </button>
-                </div>
                 <div className="px-4 py-6 bg-gray-50">
                     <h3 className="font-extrabold text-2xl">{projectData.project_name}</h3>
                     <p className="">{projectData.project_description}</p>

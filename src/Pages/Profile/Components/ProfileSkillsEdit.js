@@ -80,10 +80,36 @@ const ProfileSkillsEdit = (props) => {
                     }
                 )
             }
-            <input type="text" value={newSkillTechnologyName} onChange={(e)=>{setNewSkillTechnologyName(e.target.value)}} />
-            <input type="number" value={newSkillRating} onChange={(e) => {handleChangeNewSkillRating(e.target.value)}} />
-            <button onClick={handleNewSkillSubmit}>Submit</button>
-            <br/>
+            <form className="px-2 py-4">
+                <p>Add a Skill</p>
+                <div className="flex flex-row">
+                    <div className="flex flex-col">
+                        <input 
+                            name="newSkillTechnologyName"
+                            type="text" 
+                            value={newSkillTechnologyName} 
+                            onChange={(e)=>{setNewSkillTechnologyName(e.target.value)}}
+                            placeholder="Technology name"
+                            className="border rounded-md" 
+                        />
+                    </div>
+                    <div className="flex flex-col">
+                        <input 
+                            name="NewSkillRating"
+                            type="number" 
+                            value={newSkillRating} 
+                            onChange={(e) => {handleChangeNewSkillRating(e.target.value)}} 
+                            className="border rounded-md"
+                        />
+                    </div>
+                </div>
+                <button 
+                    onClick={handleNewSkillSubmit}
+                    className="rounded-md bg-green-500 text-white p-1 shadow-md focus:ring-white-2"
+                >
+                    Submit
+                </button>
+            </form>
             {
                 NewSkillTechnologyNameRecommendation &&
                 <select value={newSkillTechnologyName} onChange={(e) => setNewSkillTechnologyName(e.target.value)}>

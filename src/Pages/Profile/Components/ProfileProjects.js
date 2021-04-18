@@ -4,6 +4,7 @@ import NewProjectForm from '../../../Components/NewProjectForm'
 import query from '../../../query'
 import { PencilIcon } from '@heroicons/react/outline'
 import ProjectDetail from '../../ProjectDetail'
+import SlideUpWindow from '../../../Components/SlideUpWindow'
 
 const ProfileProjects = (props) => {
 
@@ -39,7 +40,7 @@ const ProfileProjects = (props) => {
                     Projects
                 </h3>
                 {
-                    props.isOwnedProfile && 
+                    isOwnedProfile && 
                     <button onClick={toggleEditMode}>
                         <PencilIcon className="block h-6 w-6"/>
                     </button>
@@ -58,13 +59,9 @@ const ProfileProjects = (props) => {
                     )
                 })
             }
-            {
-                showProjectDetail &&
-                <div className="absolute top-0 left-0 w-full min-h-screen">
-                    <ProjectDetail projectId={targetProject} close={() => setShowProjectDetail(false)}/>
-                </div>
-
-            }
+            <SlideUpWindow isShowing={showProjectDetail} setIsShowing={setShowProjectDetail}>
+                <ProjectDetail projectId={targetProject} close={() => setShowProjectDetail(false)}/>
+            </SlideUpWindow>
         </div>
     )
 }
