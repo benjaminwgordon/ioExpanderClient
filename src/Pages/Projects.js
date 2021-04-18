@@ -4,6 +4,7 @@ import AuthorizationContext from '../authenticationContext'
 import Project from './Project'
 import NewProjectForm from '../Components/NewProjectForm'
 import ProjectDetail from '../Pages/ProjectDetail'
+import SlideUpWindow from '../Components/SlideUpWindow'
 
 const Projects = () => {
     const token = useContext(AuthorizationContext).user.token
@@ -79,12 +80,9 @@ const Projects = () => {
                                 </ul>
                             }
                         </div>
-                        {
-                            showDetails &&
-                            <div className="absolute top-0 left-0 bg-gray-100 w-full min-h-screen lg:relative">
-                                { targetProjectId && <ProjectDetail projectId={targetProjectId} close={() => {setShowDetails(false)}} />}
-                            </div>
-                        }
+                        <SlideUpWindow isShowing={showDetails} setIsShowing={setShowDetails}>
+                            <ProjectDetail projectId={targetProjectId} />
+                        </SlideUpWindow>
                     </div>
                 </div>
             </div>

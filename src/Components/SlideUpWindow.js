@@ -16,10 +16,10 @@ const SlideUpWindow = (props) => {
                 leave="transition duration-500"
                 leaveFrom="transform  translate-y-0"
                 leaveTo="transform  translate-y-full"
-                className="absolute top-10 left-0 min-h-screen w-full"
+                className="absolute top-0 left-0 min-h-screen w-full"
             >
-                <div >
-                    <div className="px-6 py-2 border-b flex justify-between lg:invisible lg:py-0 bg-white">
+                <div className="bg-white">                    
+                    <div className="px-6 py-2 border-b flex justify-between lg:invisible lg:py-0">
                         <button onClick={() => setIsShowing(false)} >
                             <XIcon className="block h-6 w-6" aria-hidden="true" />
                         </button>

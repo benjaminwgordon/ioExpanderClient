@@ -7,7 +7,7 @@ import { DotsHorizontalIcon, XIcon } from '@heroicons/react/outline'
 const ProjectDetail = (props) => {
 
     const token = useContext(authorizationContext).user.token
-    const {projectId, close} = props
+    const {projectId} = props
     const [projectData, setProjectData] = useState(null)
 
     useEffect(() => {
