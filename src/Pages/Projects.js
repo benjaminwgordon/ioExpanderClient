@@ -5,6 +5,9 @@ import Project from './Project'
 import NewProjectForm from '../Components/NewProjectForm'
 import ProjectDetail from '../Pages/ProjectDetail'
 import SlideUpWindow from '../Components/SlideUpWindow'
+import Page from '../Components/Page'
+import Button from './Profile/Components/Button'
+import LoadingSpinner from '../Components/LoadingSpinner'
 
 const Projects = () => {
     const token = useContext(AuthorizationContext).user.token
@@ -47,23 +50,23 @@ const Projects = () => {
     }
     
     return (
-        <div className="min-h-screen justify-center bg-gray-100">
-            <div className="max-w-md w-full relative">
+        <Page>
+            <div className="justify-center">
                 <div className="text-center">
-                    <button onClick={toggleShowCreateForm}>Create New Project</button>
-                        { showCreateForm &&
-                            <NewProjectForm onSuccess={newProject => updateProjects(newProject)} onFailure={()=>{}}/>
-                        }
+                    <Button onClick={toggleShowCreateForm}>
+                        Create New Project
+                    </Button>
+                    <SlideUpWindow isShowing={showCreateForm} setIsShowing={setShowCreateForm}>
+                        <NewProjectForm onSuccess={newProject => updateProjects(newProject)} onFailure={()=>{}}/>
+                    </SlideUpWindow>
                     <h2>Top Projects</h2>
                 </div>   
-                <div className="flex justify-center bg-gray-100 py-6 px-0 lg:px-8">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-1 justify-evenly w-full">
+                <div className="flex justify-center py-6 px-0 lg:px-8">
+                    <div className="grid grid-cols-1 lg:grid-cols-3 lg:gap-10 justify-evenly w-full">
                         <div className="flex flex-col">
                             {
                                 error 
-                                ?<div>
-                                    <p>Error finding Projects</p>
-                                </div> 
+                                ? <LoadingSpinner /> 
                                 : projects.length > 0 &&
                                 <ul className="rounded-sm border shadow-md divide-y-2 bg-white">
                                     {projects.map(project => {
@@ -80,13 +83,15 @@ const Projects = () => {
                                 </ul>
                             }
                         </div>
-                        <SlideUpWindow isShowing={showDetails} setIsShowing={setShowDetails}>
-                            <ProjectDetail projectId={targetProjectId} />
-                        </SlideUpWindow>
+                        <div className="col-span-2">
+                            <SlideUpWindow isShowing={showDetails} setIsShowing={setShowDetails} >
+                                <ProjectDetail projectId={targetProjectId} />
+                            </SlideUpWindow>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </Page>
     )
 }
 

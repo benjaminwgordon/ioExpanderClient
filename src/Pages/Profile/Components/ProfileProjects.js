@@ -5,6 +5,7 @@ import query from '../../../query'
 import { PencilIcon } from '@heroicons/react/outline'
 import ProjectDetail from '../../ProjectDetail'
 import SlideUpWindow from '../../../Components/SlideUpWindow'
+import LoadingSpinner from '../../../Components/LoadingSpinner'
 
 const ProfileProjects = (props) => {
 
@@ -46,12 +47,13 @@ const ProfileProjects = (props) => {
                     </button>
                 }
             </div>
+            <SlideUpWindow isShowing={showAddProject} setIsShowing={setShowAddProject}>
+                <NewProjectForm />
+            </SlideUpWindow>
             {
-                showAddProject && <NewProjectForm />
-            }
-            {
-                projects
-                && projects.map(project => {
+                !projects
+                ? <LoadingSpinner />
+                : projects.map(project => {
                     return(
                         <div key={project.project_name} className="px-3">
                             <h4 onClick={() => selectProject(project.project_id)}>{project.project_name}</h4>

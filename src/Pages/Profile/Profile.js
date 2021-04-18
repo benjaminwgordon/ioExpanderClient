@@ -6,6 +6,8 @@ import {useParams} from 'react-router-dom'
 import ProfileSkills from './Components/ProfileSkills'
 import ProfileProjects from './Components/ProfileProjects'
 import ProfileSection from './Components/ProfileSection'
+import Page from '../../Components/Page'
+import LoadingSpinner from '../../Components/LoadingSpinner'
 
 const Profile = () => {
 
@@ -36,15 +38,20 @@ const Profile = () => {
     }, [token, targetUserId, user_id])
 
     return (
-        targetUserData &&
-        <div className="min-h-screen w-full divide-y-2 relative">
-            <ProfileSection>
-                <ProfileSkills targetUserData={targetUserData} targetUserId={targetUserId} isOwnedProfile={isOwnedProfile} />
-            </ProfileSection>
-            <ProfileSection>
-                <ProfileProjects targetUserData={targetUserData} targetUserId={targetUserId} isOwnedProfile={isOwnedProfile} />
-            </ProfileSection>
-        </div>
+        <Page>
+            {
+                !targetUserData
+                ? <LoadingSpinner/>
+                :<div className="min-h-screen w-full divide-y-2 relative">
+                    <ProfileSection>
+                        <ProfileSkills targetUserData={targetUserData} targetUserId={targetUserId} isOwnedProfile={isOwnedProfile} />
+                    </ProfileSection>
+                    <ProfileSection>
+                        <ProfileProjects targetUserData={targetUserData} targetUserId={targetUserId} isOwnedProfile={isOwnedProfile} />
+                    </ProfileSection>
+                </div>
+            }
+        </Page>
     )
 }
 

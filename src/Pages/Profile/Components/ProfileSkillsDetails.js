@@ -1,4 +1,5 @@
 import React from 'react'
+import LoadingSpinner from '../../../Components/LoadingSpinner'
 
 const ProfileSkillsDetails = (props) => {
 
@@ -7,8 +8,9 @@ const ProfileSkillsDetails = (props) => {
     return (
         <div>
             {
-            skills &&
-            skills.map(skill => {
+            !skills
+            ? <LoadingSpinner />
+            :skills.map(skill => {
                     return(
                         <div className="px-3">
                             <span>{skill.technology_name}</span>
