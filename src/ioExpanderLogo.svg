@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="0.188 0.052 35 35" width="35" height="35" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com">
+  <g>
+    <line style="stroke: rgb(255, 255, 255); stroke-width: 2px;" x1="8.79" y1="17.264" x2="28.772" y2="17.264"/>
+    <line style="fill:rgb(255, 255, 255); stroke: rgb(255, 255, 255); stroke-width: 2px;" x1="18.8" y1="6.3" x2="18.8" y2="28.2"/>
+    <line style="fill; stroke: rgb(255, 255, 255); stroke-width: 2px;" x1="8.79" y1="27.254" x2="18.781" y2="27.254"/>
+    <line style="fill; stroke: rgb(255, 255, 255); stroke-width: 2px;" x1="8.79" y1="7.273" x2="18.781" y2="7.273" bx:origin="0.067999 0"/>
+    <circle style="stroke: rgb(255, 255, 255); fill: rgb(255, 255, 255);" cx="8.79" cy="7.273" r="2" bx:origin="-17.123001 0.553501"/>
+    <circle style="stroke: rgb(255, 255, 255); fill: rgb(255, 255, 255)" cx="8.79" cy="17.264" r="2" bx:origin="-17.123001 0.553501"/>
+    <circle style="stroke: rgb(255, 255, 255); fill: rgb(255, 255, 255)" cx="8.79" cy="27.254" r="2" bx:origin="-17.123001 0.553501"/>
+    <path d="M 29.786 18.443 H 31.447 L 31.447 16.443 L 36.447 18.943 L 31.447 21.443 L 31.447 19.443 H 29.786 V 18.443 Z" style="fill:rgb(255, 255, 255); stroke: rgb(255, 255, 255);" transform="matrix(1, 0.000006, -0.000006, 1, -5.785871, -1.64318)" bx:shape="arrow 29.786 16.443 6.661 5 1 5 0 1@b9ba37d9" bx:origin="0.450381 0.47516"/>
+  </g>
+</svg>
