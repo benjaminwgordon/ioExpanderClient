@@ -42,7 +42,7 @@ const Profile = () => {
             {
                 !targetUserData
                 ? <LoadingSpinner/>
-                :<div className="min-h-screen w-full divide-y-2 relative">
+                :<div className="min-h-screen w-full divide-y-8 relative">
                     <ProfileSection>
                         <ProfileSkills targetUserData={targetUserData} targetUserId={targetUserId} isOwnedProfile={isOwnedProfile} />
                     </ProfileSection>

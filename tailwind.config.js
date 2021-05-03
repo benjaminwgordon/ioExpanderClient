@@ -1,3 +1,4 @@
+const colors = require('tailwindcss/colors')
 const defaultTheme = require('tailwindcss/defaultTheme')
 
 
@@ -11,7 +12,7 @@ module.exports = {
       },
       transitionDuration: {
         '0': '0ms',
-       }
+       },
     },
   },
   variants: {

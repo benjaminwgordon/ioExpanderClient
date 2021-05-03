@@ -28,7 +28,7 @@ const ProfileSkills = (props) => {
     
 
     return (
-        <div className="py-2">
+        <div className="px-2 py-2">
             <div className="flex justify-between">
                 <h3 className="font-extrabold text-xl">Skills</h3>
                 {

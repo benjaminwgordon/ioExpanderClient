@@ -2,7 +2,7 @@ import React, {useState, useEffect, useContext} from 'react'
 import authenticationContext from '../../../authenticationContext'
 import NewProjectForm from '../../../Components/NewProjectForm'
 import query from '../../../query'
-import { PencilIcon } from '@heroicons/react/outline'
+import { PencilIcon, PlusIcon } from '@heroicons/react/outline'
 import ProjectDetail from '../../ProjectDetail'
 import SlideUpWindow from '../../../Components/SlideUpWindow'
 import LoadingSpinner from '../../../Components/LoadingSpinner'
@@ -35,15 +35,15 @@ const ProfileProjects = (props) => {
     }
 
     return (
-        <div>
-           <div className="flex justify-between">
-                <h3 className="font-extrabold text-xl">
+        <div className="">
+           <div className="flex justify-between px-2 py-2">
+                <h3 className="font-bold text-xl">
                     Projects
                 </h3>
                 {
                     isOwnedProfile && 
                     <button onClick={toggleEditMode}>
-                        <PencilIcon className="block h-6 w-6"/>
+                        <PlusIcon className="block h-8 w-8"/>
                     </button>
                 }
             </div>
@@ -53,13 +53,21 @@ const ProfileProjects = (props) => {
             {
                 !projects
                 ? <LoadingSpinner />
-                : projects.map(project => {
-                    return(
-                        <div key={project.project_name} className="px-3">
-                            <h4 onClick={() => selectProject(project.project_id)}>{project.project_name}</h4>
-                        </div>
-                    )
-                })
+                : <div>
+                    {projects.map(project => {
+                        return(
+                            <div key={project.project_name} className="py-1">
+                                <div onClick={() => selectProject(project.project_id)} className="flex flex-row px-2">
+                                    <div className="w-1/6">IMG</div>
+                                    <div className="w-full">
+                                        <h4 className="font-bold">{project.project_name}</h4>
+                                        <p className="font-light border-b-2 text-sm pb-1">{project.project_description}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        )
+                    })}
+                </div>
             }
             <SlideUpWindow isShowing={showProjectDetail} setIsShowing={setShowProjectDetail}>
                 <ProjectDetail projectId={targetProject} close={() => setShowProjectDetail(false)}/>

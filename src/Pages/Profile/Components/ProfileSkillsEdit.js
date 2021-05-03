@@ -92,6 +92,19 @@ const ProfileSkillsEdit = (props) => {
                             placeholder="Technology name"
                             className="border rounded-md" 
                         />
+                        {
+                            NewSkillTechnologyNameRecommendation &&
+                            <select value={newSkillTechnologyName} onChange={(e) => setNewSkillTechnologyName(e.target.value)} className="appearance-none bg-gray-100 rounded-b-sm">
+                                <option value={newSkillTechnologyName} className="hover:bg-gray-200 focus:bg-gray-200">{newSkillTechnologyName}</option>
+                                    {
+                                    NewSkillTechnologyNameRecommendation.map(recommendation => {
+                                        return (
+                                            <option value={recommendation.technology_name}>{recommendation.technology_name}</option>
+                                        )
+                                    })
+                        }
+                </select>
+            } 
                     </div>
                     <div className="flex flex-col">
                         <input 
@@ -110,19 +123,7 @@ const ProfileSkillsEdit = (props) => {
                     Submit
                 </button>
             </form>
-            {
-                NewSkillTechnologyNameRecommendation &&
-                <select value={newSkillTechnologyName} onChange={(e) => setNewSkillTechnologyName(e.target.value)}>
-                    <option value={newSkillTechnologyName}>{newSkillTechnologyName}</option>
-                    {
-                        NewSkillTechnologyNameRecommendation.map(recommendation => {
-                            return (
-                                <option value={recommendation.technology_name}>{recommendation.technology_name}</option>
-                            )
-                        })
-                    }
-                </select>
-            } 
+            
             {message && 
                 <p>{message}</p>
             }
