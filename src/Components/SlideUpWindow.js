@@ -5,7 +5,7 @@ import { XIcon, DotsHorizontalIcon } from '@heroicons/react/outline'
 
 const SlideUpWindow = (props) => {
 
-    const {isShowing, setIsShowing} = props
+    const {isShowing, setIsShowing, windowTitle} = props
 
     return (
             <Transition
@@ -19,10 +19,12 @@ const SlideUpWindow = (props) => {
                 className="absolute top-0 left-0 min-h-screen w-full lg:relative bg-white"
             >
                 <div className="bg-white">                    
-                    <div className="px-6 py-2 border-b-2 shadow-md flex justify-between lg:py-0 lg:hidden">
+                    <div className="px-4 py-2 border-b-2 shadow-md flex justify-between lg:py-0 lg:hidden">
                         <button onClick={() => setIsShowing(false)} >
                             <XIcon className="block h-6 w-6" aria-hidden="true" />
                         </button>
+                        <h3 className="font-bold text-xl">{windowTitle}</h3>
+                        <div></div>
                     </div>
                     <div>
                         {props.children}

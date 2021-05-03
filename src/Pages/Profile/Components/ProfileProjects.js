@@ -34,6 +34,11 @@ const ProfileProjects = (props) => {
         setShowAddProject(!showAddProject)
     }
 
+    const handleNewProject = (newProject) => {
+        setProjects([newProject, ...projects])
+        setShowAddProject(false)
+    }
+
     return (
         <div className="">
            <div className="flex justify-between px-2 py-2">
@@ -47,8 +52,8 @@ const ProfileProjects = (props) => {
                     </button>
                 }
             </div>
-            <SlideUpWindow isShowing={showAddProject} setIsShowing={setShowAddProject}>
-                <NewProjectForm />
+            <SlideUpWindow isShowing={showAddProject} setIsShowing={setShowAddProject} windowTitle="New Project">
+                <NewProjectForm onSuccess={(newProject) => handleNewProject(newProject)} onFailure={()=>{}}/>
             </SlideUpWindow>
             {
                 !projects
