@@ -45,7 +45,7 @@ const ProfileSkills = (props) => {
             <div>
                 {
                     isEditMode 
-                    ? <ProfileSkillsEdit skills={skills} setSkills={setSkills} targetUserId={targetUserId} toggleEditMode={()=>setIsEditMode(false)}/>
+                    ? <ProfileSkillsEdit skills={skills} setSkills={setSkills} targetUserId={targetUserId} toggleIsEditMode={()=>setIsEditMode(false)}/>
                     : <ProfileSkillsDetails skills={skills}  targetUserId={targetUserId} />
                 }
             </div>
