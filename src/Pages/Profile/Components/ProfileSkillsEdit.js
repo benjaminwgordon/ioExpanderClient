@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext} from 'react'
 import authenticationContext from '../../../authenticationContext'
 import query from '../../../query'
-import { PlusIcon, MinusIcon, XIcon } from '@heroicons/react/outline'
+import {  XIcon } from '@heroicons/react/outline'
 
 const ProfileSkillsEdit = (props) => {
 
-    const {skills, setSkills, targetUserId} = props
+    const {skills, setSkills, targetUserId, toggleIsEditMode} = props
     const token = useContext(authenticationContext).user.token
     const user_id = useContext(authenticationContext).user.user_id
     const [newSkillTechnologyName, setNewSkillTechnologyName] = useState("")
@@ -26,14 +26,19 @@ const ProfileSkillsEdit = (props) => {
 
     const handleNewSkillSubmit = async () => {
         const res = await query.post(`/users/${user_id}/skills`, {technology_name: newSkillTechnologyName, technology_rating: newSkillRating}, token)
+        console.log(res)
         if (res.error){
+            console.log(res.error)
             setMessage("You already have this skill")
-            return
+            setNewSkillTechnologyName("")
+            setNewSkillRating(0)
+        } else{
+            setMessage("")
+            setSkills([...skills, res.insertedSkillDetails])
+            setNewSkillTechnologyName("")
+            setNewSkillRating(0)
+            toggleIsEditMode()
         }
-        setMessage("")
-        setSkills([...skills, res.insertedSkillDetails])
-        setNewSkillTechnologyName("")
-        setNewSkillRating(0)
     }
 
     useEffect(() => {

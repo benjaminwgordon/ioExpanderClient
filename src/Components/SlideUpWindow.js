@@ -1,6 +1,6 @@
 import { Transition } from '@headlessui/react'
-import React, {useState} from 'react'
-import { XIcon, DotsHorizontalIcon } from '@heroicons/react/outline'
+import React from 'react'
+import { XIcon } from '@heroicons/react/outline'
 
 
 const SlideUpWindow = (props) => {

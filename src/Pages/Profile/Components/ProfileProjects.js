@@ -2,7 +2,7 @@ import React, {useState, useEffect, useContext} from 'react'
 import authenticationContext from '../../../authenticationContext'
 import NewProjectForm from '../../../Components/NewProjectForm'
 import query from '../../../query'
-import { PencilIcon, PlusIcon } from '@heroicons/react/outline'
+import { PlusIcon } from '@heroicons/react/outline'
 import ProjectDetail from '../../ProjectDetail'
 import SlideUpWindow from '../../../Components/SlideUpWindow'
 import LoadingSpinner from '../../../Components/LoadingSpinner'
@@ -26,11 +26,12 @@ const ProfileProjects = (props) => {
         const fetchProjects = async () => {
             const res = await query.get(`/users/${targetUserId}/projects`, token)
             setProjects(res.usersProjects) 
+            setTargetProject(res.usersProjects[0].project_id)
         }
         fetchProjects()
     }, [targetUserId, token])
 
-    const toggleEditMode = () => {
+    const toggleNewProjectMode = () => {
         setShowAddProject(!showAddProject)
     }
 
@@ -47,36 +48,42 @@ const ProfileProjects = (props) => {
                 </h3>
                 {
                     isOwnedProfile && 
-                    <button onClick={toggleEditMode}>
+                    <button onClick={toggleNewProjectMode}>
                         <PlusIcon className="block h-8 w-8"/>
                     </button>
                 }
             </div>
-            <SlideUpWindow isShowing={showAddProject} setIsShowing={setShowAddProject} windowTitle="New Project">
-                <NewProjectForm onSuccess={(newProject) => handleNewProject(newProject)} onFailure={()=>{}}/>
-            </SlideUpWindow>
-            {
-                !projects
-                ? <LoadingSpinner />
-                : <div>
-                    {projects.map(project => {
-                        return(
-                            <div key={project.project_name} className="py-1">
-                                <div onClick={() => selectProject(project.project_id)} className="flex flex-row px-2">
-                                    <div className="w-1/6">IMG</div>
-                                    <div className="w-full">
-                                        <h4 className="font-bold">{project.project_name}</h4>
-                                        <p className="font-light border-b-2 text-sm pb-1">{project.project_description}</p>
+            {showAddProject &&
+                <SlideUpWindow isShowing={showAddProject} setIsShowing={setShowAddProject} windowTitle="New Project">
+                    <NewProjectForm onSuccess={(newProject) => handleNewProject(newProject)} onFailure={()=>{}} close={()=>setShowAddProject(false)}/>
+                </SlideUpWindow>
+            }
+            <div className="flex flex-row">
+                {
+                    !projects
+                    ? <LoadingSpinner />
+                    : <div className="lg:w-1/3 overflow-y-scroll">
+                        {projects.map(project => {
+                            return(
+                                <div key={project.project_name} className="py-1">
+                                    <div onClick={() => selectProject(project.project_id)} className="flex flex-row">
+                                        <div className="w-1/6 text-center px-4">IMG</div>
+                                        <div className="w-full">
+                                            <h4 className="font-bold">{project.project_name}</h4>
+                                            <p className="font-light border-b-2 text-sm pb-1 pr-2">{project.project_description}</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        )
-                    })}
+                            )
+                        })}
+                    </div>
+                }
+                <div className="lg:w-2/3 overflow-y-scroll">
+                    <SlideUpWindow isShowing={showProjectDetail} setIsShowing={setShowProjectDetail}>
+                        <ProjectDetail projectId={targetProject} close={() => setShowProjectDetail(false)}/>
+                    </SlideUpWindow>
                 </div>
-            }
-            <SlideUpWindow isShowing={showProjectDetail} setIsShowing={setShowProjectDetail}>
-                <ProjectDetail projectId={targetProject} close={() => setShowProjectDetail(false)}/>
-            </SlideUpWindow>
+            </div>
         </div>
     )
 }

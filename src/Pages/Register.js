@@ -17,7 +17,7 @@ const Register = (props) => {
         e.preventDefault()
         setPassword("")
         const res = await query.post("/auth/register", {username, email, password})
-        if (res.error = 409){
+        if (res.error === 409){
             setError("Credentials already in use")
         } else{
             setError("")

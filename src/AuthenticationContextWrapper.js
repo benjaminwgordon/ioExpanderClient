@@ -14,7 +14,8 @@ const AuthenticationContextWrapper = (props) => {
 
     useEffect(() => {
         if (!user.token){
-            history.push("/login")
+            console.log({user})
+            //history.push("/login")
         }
     }, [user, history])
 

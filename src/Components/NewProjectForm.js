@@ -4,7 +4,7 @@ import AuthorizationContext from '../authenticationContext'
 
 const NewProjectForm = (props) => {
 
-    const {onSuccess, onFailure} = props
+    const {onSuccess, onFailure, close} = props
 
     const token = useContext(AuthorizationContext).user.token
     const [projectName, setProjectName] = useState("")
@@ -41,7 +41,10 @@ const NewProjectForm = (props) => {
 
 
     return (
-        <form className="px-6 py-6 flex flex-col">
+        <form className="px-6 py-6 flex flex-col lg:w-1/2 m-auto max-w-lg">
+            <h3 className="hidden lg:block text-xl font-bold text-center">
+                New Project
+            </h3>
             <input 
                 type="text" 
                 placeholder="Project Name" 
@@ -59,13 +62,21 @@ const NewProjectForm = (props) => {
                 className="py-1 my-1 border border-gray-300 rounded-md pl-2"
                 maxLength="80"
             />
-            <button 
-                onClick={submitNewProject}
-                className="py-1 my-1 bg-green-300"
-            >
-
+            <div className="flex flex-col sm:flex-row w-full justify-evenly">
+                <button 
+                    onClick={close}
+                    className="py-1 m-1 bg-red-300 w-full rounded-md"
+                >
+                    Cancel
+                </button>
+                <button 
+                    onClick={submitNewProject}
+                    className="py-1 m-1 bg-green-300 w-full rounded-md"
+                >
                     Submit
-            </button>
+                </button>
+
+            </div>
             {
                 error && <p className="text-red-600 text-center">{error}</p>
             }

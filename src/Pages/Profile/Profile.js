@@ -43,6 +43,7 @@ const Profile = () => {
                 !targetUserData
                 ? <LoadingSpinner/>
                 :<div className="min-h-screen w-full divide-y-8 relative">
+                    <h1 className="font-bold text-3xl p-2">{targetUserData.username.charAt(0).toUpperCase() + targetUserData.username.slice(1)}</h1>
                     <ProfileSection>
                         <ProfileSkills targetUserData={targetUserData} targetUserId={targetUserId} isOwnedProfile={isOwnedProfile} />
                     </ProfileSection>
