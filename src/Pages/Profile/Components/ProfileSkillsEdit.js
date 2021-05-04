@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext} from 'react'
+import React, { useState, useEffect, useContext, useRef} from 'react'
 import authenticationContext from '../../../authenticationContext'
 import query from '../../../query'
 import {  XIcon } from '@heroicons/react/outline'
@@ -11,6 +11,7 @@ const ProfileSkillsEdit = (props) => {
     const [NewSkillTechnologyNameRecommendation, setNewSkillTechnologyNameRecommendation] = useState("")
     const [newSkillRating, setNewSkillRating] = useState(0)
     const [message, setMessage] = useState("")
+    const dropDownRef = useRef(null)
 
     const deleteSkill = async (deletedSkill) => {
         const res = await query.deleteRequest(`/users/${targetUserId}/skills/${deletedSkill.skill_id}`, token)
@@ -83,33 +84,40 @@ const ProfileSkillsEdit = (props) => {
                     }
                 )
             }
-            <form className="px-2 py-4">
-                <p>Add a Skill</p>
-                <div className="flex flex-row">
-                    <div className="flex flex-col">
+            <form className="px-2 py-4" >
+                <p className="font-bold text-l">Add a Skill</p>
+                <div className="flex flex-row w-full lg:max-w-screen-sm">
+                    <div className="flex flex-col w-3/4">
                         <input 
                             name="newSkillTechnologyName"
                             type="text" 
                             value={newSkillTechnologyName} 
                             onChange={(e)=>{setNewSkillTechnologyName(e.target.value)}}
                             placeholder="Technology name"
-                            className="border rounded-md" 
+                            className="border rounded-md p-1 border-gray-400" 
+                            autoComplete="off"
+                            ref={dropDownRef}
+                            onClick={()=>{
+                                const topPos = dropDownRef.current.getBoundingClientRect().top
+                                const yOffset = window.pageYOffset
+                                window.scrollTo({top: topPos + yOffset - 100, behavior:'smooth'})
+                            }}
+                            
                         />
                         {
                             NewSkillTechnologyNameRecommendation &&
-                            <select value={newSkillTechnologyName} onChange={(e) => setNewSkillTechnologyName(e.target.value)} className="appearance-none bg-gray-100 rounded-b-sm">
-                                <option value={newSkillTechnologyName} className="hover:bg-gray-200 focus:bg-gray-200">{newSkillTechnologyName}</option>
-                                    {
-                                        NewSkillTechnologyNameRecommendation.map(recommendation => {
-                                            return (
-                                                <option value={recommendation.technology_name}>{recommendation.technology_name}</option>
-                                            )
-                                        })
-                                    }
-                            </select>
+                            <div>                  
+                            {
+                                NewSkillTechnologyNameRecommendation.map(recommendation => {
+                                    return (
+                                        <div className="py-1 bg-gray-200 hover:bg-white focus:bg-white" onClick={()=>{setNewSkillTechnologyName(recommendation.technology_name); setNewSkillTechnologyNameRecommendation("")}}>{recommendation.technology_name}</div>
+                                    )
+                                })
+                            }
+                            </div>
                         } 
                     </div>
-                <div className="flex flex-col">
+                <div className="flex flex-col w-1/4">
                     <input 
                         name="NewSkillRating"
                         type="number" 
