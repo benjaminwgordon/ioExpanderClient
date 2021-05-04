@@ -18,6 +18,10 @@ const ProfileSkills = (props) => {
     }
 
     useEffect(() => {
+        console.log({
+            userid:targetUserId,
+            token: token
+        })
         const fetchSkills = async () => {
             const res = await query.get(`/users/${targetUserId}/skills`, token)
             setSkills(res.usersSkills) 

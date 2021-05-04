@@ -6,8 +6,7 @@ import {  XIcon } from '@heroicons/react/outline'
 const ProfileSkillsEdit = (props) => {
 
     const {skills, setSkills, targetUserId, toggleIsEditMode} = props
-    const token = useContext(authenticationContext).user.token
-    const user_id = useContext(authenticationContext).user.user_id
+    const {token, user_id} = useContext(authenticationContext).user
     const [newSkillTechnologyName, setNewSkillTechnologyName] = useState("")
     const [NewSkillTechnologyNameRecommendation, setNewSkillTechnologyNameRecommendation] = useState("")
     const [newSkillRating, setNewSkillRating] = useState(0)
@@ -24,11 +23,10 @@ const ProfileSkillsEdit = (props) => {
         setNewSkillRating(Math.max(0, Math.min(rating, 5)))
     }
 
-    const handleNewSkillSubmit = async () => {
-        const res = await query.post(`/users/${user_id}/skills`, {technology_name: newSkillTechnologyName, technology_rating: newSkillRating}, token)
-        console.log(res)
+    const handleNewSkillSubmit = async (e) => {
+        e.preventDefault()
+        const res = await query.post(`/users/${targetUserId}/skills`, {technology_name: newSkillTechnologyName, technology_rating: newSkillRating}, token)
         if (res.error){
-            console.log(res.error)
             setMessage("You already have this skill")
             setNewSkillTechnologyName("")
             setNewSkillRating(0)
@@ -102,32 +100,32 @@ const ProfileSkillsEdit = (props) => {
                             <select value={newSkillTechnologyName} onChange={(e) => setNewSkillTechnologyName(e.target.value)} className="appearance-none bg-gray-100 rounded-b-sm">
                                 <option value={newSkillTechnologyName} className="hover:bg-gray-200 focus:bg-gray-200">{newSkillTechnologyName}</option>
                                     {
-                                    NewSkillTechnologyNameRecommendation.map(recommendation => {
-                                        return (
-                                            <option value={recommendation.technology_name}>{recommendation.technology_name}</option>
-                                        )
-                                    })
-                        }
-                </select>
-            } 
+                                        NewSkillTechnologyNameRecommendation.map(recommendation => {
+                                            return (
+                                                <option value={recommendation.technology_name}>{recommendation.technology_name}</option>
+                                            )
+                                        })
+                                    }
+                            </select>
+                        } 
                     </div>
-                    <div className="flex flex-col">
-                        <input 
-                            name="NewSkillRating"
-                            type="number" 
-                            value={newSkillRating} 
-                            onChange={(e) => {handleChangeNewSkillRating(e.target.value)}} 
-                            className="border rounded-md"
-                        />
-                    </div>
+                <div className="flex flex-col">
+                    <input 
+                        name="NewSkillRating"
+                        type="number" 
+                        value={newSkillRating} 
+                        onChange={(e) => {handleChangeNewSkillRating(e.target.value)}} 
+                        className="border rounded-md"
+                    />
                 </div>
-                <button 
-                    onClick={handleNewSkillSubmit}
-                    className="rounded-md bg-green-500 text-white p-1 shadow-md focus:ring-white-2"
-                >
-                    Submit
-                </button>
-            </form>
+            </div>
+            <button 
+                onClick={(e) => handleNewSkillSubmit(e)}
+                className="rounded-md bg-green-500 text-white p-1 shadow-md focus:ring-white-2"
+            >
+                Submit
+            </button>
+        </form>
             
             {message && 
                 <p>{message}</p>
