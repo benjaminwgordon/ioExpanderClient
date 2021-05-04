@@ -53,18 +53,13 @@ const ProfileSkillsEdit = (props) => {
     }, [newSkillTechnologyName, token])
 
     return (
-        <div>
+        <div className="px-3">
             {
                 skills &&
                 skills.sort((a,b) => b.technology_rating - a.technology_rating).map(skill => {
                         return(
-                            <div key={skill.technology_name + skill.technology_rating} className="px-3">
-                                <div className="flex flex-row justify-between">
-                                    <div>
-                                        <span>{skill.technology_name}</span>
-                                        <span>{" : "}</span>
-                                        <span>{skill.technology_rating}</span>
-                                    </div>
+                            <div key={skill.technology_name + skill.technology_rating} >
+                                <div className="p-1 flex flex-row justify-start">
                                     <div className="flex flex-row">
                                         {/* Leaving in case I decide to allow updating existing skills dynamically */}
                                         
@@ -75,9 +70,15 @@ const ProfileSkillsEdit = (props) => {
                                             <PlusIcon className="w-8 h-8 bg-green-200 rounded-md p-1" />
                                         </button> */}
                                         <button onClick={() => deleteSkill(skill)}>
-                                            <XIcon className="w-8 h-8 bg-red-400 rounded-md p-1 text-white" />
+                                            <XIcon className="w-7 h-7 bg-red-400 rounded-md p-1 text-white" />
                                         </button>
                                     </div>
+                                    <div className="pl-3">
+                                        <span >{skill.technology_name}</span>
+                                        <span >{" : "}</span>
+                                        <span >{skill.technology_rating}</span>
+                                    </div>
+
                                 </div>
                             </div>
                         )
@@ -94,7 +95,7 @@ const ProfileSkillsEdit = (props) => {
                             value={newSkillTechnologyName} 
                             onChange={(e)=>{setNewSkillTechnologyName(e.target.value)}}
                             placeholder="Technology name"
-                            className="border text-lg rounded-l-md p-1 border-gray-400" 
+                            className={'border text-md p-1 border-gray-400 ' + (NewSkillTechnologyNameRecommendation.length > 1 ? "rounded-tl-md" : "rounded-l-md")}
                             autoComplete="off"
                             ref={dropDownRef}
                             onClick={()=>{
@@ -102,11 +103,10 @@ const ProfileSkillsEdit = (props) => {
                                 const yOffset = window.pageYOffset
                                 window.scrollTo({top: topPos + yOffset - 100, behavior:'smooth'})
                             }}
-                            
                         />
                         {
                             NewSkillTechnologyNameRecommendation.length > 1 &&
-                            <div className="py-1 absolute w-3/4 top-8">                  
+                            <div className="absolute w-3/4 top-8 border-b border-r border-l border-gray-400 rounded-b-md">                  
                             {
                                 NewSkillTechnologyNameRecommendation.slice(0,5).map(recommendation => {
                                     return (
@@ -125,7 +125,7 @@ const ProfileSkillsEdit = (props) => {
                         min="0"
                         max="5"
                         onChange={(e) => {handleChangeNewSkillRating(e.target.value)}} 
-                        className="appearance-none p-1 text-lg text-center border-t border-r border-b border-gray-400 rounded-r-md"
+                        className="appearance-none p-1 text-md text-center border-t border-r border-b border-gray-400 rounded-r-md"
                     >
                         <option value={1} className="p-1 text-center border-t border-r border-b border-gray-400 rounded-r-md">1</option>
                         <option value={2} className="p-1 text-center border-t border-r border-b border-gray-400 rounded-r-md">2</option>
@@ -138,7 +138,7 @@ const ProfileSkillsEdit = (props) => {
             </div>
             <button 
                 onClick={(e) => handleNewSkillSubmit(e)}
-                className="rounded-md bg-green-500 text-white p-1 shadow-md focus:ring-white-2"
+                className="p-2 mt-1 rounded-md bg-green-500 text-white shadow-md focus:ring-white-2"
             >
                 Submit
             </button>
