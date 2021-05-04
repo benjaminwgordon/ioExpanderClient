@@ -6,7 +6,7 @@ import {  XIcon } from '@heroicons/react/outline'
 const ProfileSkillsEdit = (props) => {
 
     const {skills, setSkills, targetUserId, toggleIsEditMode} = props
-    const {token, user_id} = useContext(authenticationContext).user
+    const {token} = useContext(authenticationContext).user
     const [newSkillTechnologyName, setNewSkillTechnologyName] = useState("")
     const [NewSkillTechnologyNameRecommendation, setNewSkillTechnologyNameRecommendation] = useState("")
     const [newSkillRating, setNewSkillRating] = useState(0)
@@ -86,7 +86,7 @@ const ProfileSkillsEdit = (props) => {
             }
             <form className="px-2 py-4" >
                 <p className="font-bold text-l">Add a Skill</p>
-                <div className="flex flex-row w-full lg:max-w-screen-sm">
+                <div className="flex flex-row w-full lg:max-w-screen-sm relative">
                     <div className="flex flex-col w-3/4">
                         <input 
                             name="newSkillTechnologyName"
@@ -94,7 +94,7 @@ const ProfileSkillsEdit = (props) => {
                             value={newSkillTechnologyName} 
                             onChange={(e)=>{setNewSkillTechnologyName(e.target.value)}}
                             placeholder="Technology name"
-                            className="border rounded-md p-1 border-gray-400" 
+                            className="border text-lg rounded-l-md p-1 border-gray-400" 
                             autoComplete="off"
                             ref={dropDownRef}
                             onClick={()=>{
@@ -105,12 +105,12 @@ const ProfileSkillsEdit = (props) => {
                             
                         />
                         {
-                            NewSkillTechnologyNameRecommendation &&
-                            <div>                  
+                            NewSkillTechnologyNameRecommendation.length > 1 &&
+                            <div className="py-1 absolute w-3/4 top-8">                  
                             {
-                                NewSkillTechnologyNameRecommendation.map(recommendation => {
+                                NewSkillTechnologyNameRecommendation.slice(0,5).map(recommendation => {
                                     return (
-                                        <div className="py-1 bg-gray-200 hover:bg-white focus:bg-white" onClick={()=>{setNewSkillTechnologyName(recommendation.technology_name); setNewSkillTechnologyNameRecommendation("")}}>{recommendation.technology_name}</div>
+                                        <div className="p-1.5 bg-gray-200 hover:bg-white focus:bg-white" onClick={()=>{setNewSkillTechnologyName(recommendation.technology_name)}}>{recommendation.technology_name}</div>
                                     )
                                 })
                             }
@@ -118,13 +118,22 @@ const ProfileSkillsEdit = (props) => {
                         } 
                     </div>
                 <div className="flex flex-col w-1/4">
-                    <input 
+                    <select 
+                        type="select" 
                         name="NewSkillRating"
-                        type="number" 
                         value={newSkillRating} 
+                        min="0"
+                        max="5"
                         onChange={(e) => {handleChangeNewSkillRating(e.target.value)}} 
-                        className="border rounded-md"
-                    />
+                        className="appearance-none p-1 text-lg text-center border-t border-r border-b border-gray-400 rounded-r-md"
+                    >
+                        <option value={1} className="p-1 text-center border-t border-r border-b border-gray-400 rounded-r-md">1</option>
+                        <option value={2} className="p-1 text-center border-t border-r border-b border-gray-400 rounded-r-md">2</option>
+                        <option value={3} className="p-1 text-center border-t border-r border-b border-gray-400 rounded-r-md">3</option>
+                        <option value={4} className="p-1 text-center border-t border-r border-b border-gray-400 rounded-r-md">4</option>
+                        <option value={5} className="p-1 text-center border-t border-r border-b border-gray-400 rounded-r-md">5</option>
+
+                    </select>
                 </div>
             </div>
             <button 
