@@ -26,7 +26,7 @@ const Login = (props) => {
                     <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Sign in to your account</h2>
                     <p
                         onClick={toggleLoginRegister}
-                        className="font-medium text-center text-indigo-600 hover:text-indigo-500">
+                        className="font-medium text-center text-indigo-600 hover:text-indigo-500 cursor-pointer">
                             Don't have an account?
                     </p>
                 </div>
@@ -59,7 +59,7 @@ const Login = (props) => {
                                 />
                             </div>
                         </div>
-                    <button type="submit" className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    <button cursor="pointer" type="submit" className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                         Submit
                     </button>
                 </form>

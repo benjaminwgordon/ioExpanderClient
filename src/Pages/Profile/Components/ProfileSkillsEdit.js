@@ -135,13 +135,14 @@ const ProfileSkillsEdit = (props) => {
 
                     </select>
                 </div>
+                <button 
+                    onClick={(e) => handleNewSkillSubmit(e)}
+                    className="p-1 ml-1 rounded-md bg-green-500 text-white shadow-md focus:ring-white-2"
+                >
+                    Submit
+                </button>
             </div>
-            <button 
-                onClick={(e) => handleNewSkillSubmit(e)}
-                className="p-2 mt-1 rounded-md bg-green-500 text-white shadow-md focus:ring-white-2"
-            >
-                Submit
-            </button>
+
         </form>
             
             {message && 

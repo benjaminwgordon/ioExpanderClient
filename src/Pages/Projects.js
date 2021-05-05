@@ -29,7 +29,6 @@ const Projects = () => {
             setError(false)
             setProjects(res.projects)
             console.log(res.projects)
-            setTargetProjectId(res.projects[0].project_id)
         }
         fetchProjects()
     }, [token])

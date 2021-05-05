@@ -2,7 +2,7 @@ import React, {useState, useEffect, useContext} from 'react'
 import authenticationContext from '../../../authenticationContext'
 import NewProjectForm from '../../../Components/NewProjectForm'
 import query from '../../../query'
-import { PlusIcon } from '@heroicons/react/outline'
+import { PlusIcon, TemplateIcon } from '@heroicons/react/outline'
 import ProjectDetail from '../../ProjectDetail'
 import SlideUpWindow from '../../../Components/SlideUpWindow'
 import LoadingSpinner from '../../../Components/LoadingSpinner'
@@ -26,7 +26,6 @@ const ProfileProjects = (props) => {
         const fetchProjects = async () => {
             const res = await query.get(`/users/${targetUserId}/projects`, token)
             setProjects(res.usersProjects) 
-            setTargetProject(res.usersProjects[0].project_id)
         }
         fetchProjects()
     }, [targetUserId, token])
@@ -41,9 +40,9 @@ const ProfileProjects = (props) => {
     }
 
     return (
-        <div className="">
-           <div className="flex justify-between px-2 py-2">
-                <h3 className="font-bold text-xl">
+        <div >
+           <div className="flex justify-between px-2 py-2 border-b border-gray-400 w-full">
+                <h3 className="font-bold text-xl ">
                     Projects
                 </h3>
                 {
@@ -67,7 +66,9 @@ const ProfileProjects = (props) => {
                             return(
                                 <div key={project.project_name} className="py-1">
                                     <div onClick={() => selectProject(project.project_id)} className="flex flex-row">
-                                        <div className="w-1/6 text-center px-4">IMG</div>
+                                        <div className="w-1/6 text-center px-4 mt-auto mb-auto">
+                                            <TemplateIcon className="w-8 h-8"/>
+                                        </div>
                                         <div className="w-full">
                                             <h4 className="font-bold">{project.project_name}</h4>
                                             <p className="font-light border-b-2 text-sm pb-1 pr-2">{project.project_description}</p>

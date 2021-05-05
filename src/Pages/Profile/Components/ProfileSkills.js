@@ -32,9 +32,9 @@ const ProfileSkills = (props) => {
     
 
     return (
-        <div className="px-2 py-2">
-            <div className="flex justify-between">
-                <h3 className="font-extrabold text-xl">Skills</h3>
+        <div className="py-2 ">
+            <div className="px-2 flex justify-between border-b border-gray-400 w-full">
+                <h3 className="font-extrabold text-xl ">Skills</h3>
                 {
                     props.isOwnedProfile && 
                     <button onClick={toggleEditMode}>

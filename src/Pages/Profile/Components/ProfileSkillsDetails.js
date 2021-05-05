@@ -12,7 +12,7 @@ const ProfileSkillsDetails = (props) => {
             ? <LoadingSpinner />
             :skills.sort((a,b)=> b.technology_rating - a.technology_rating).map(skill => {
                     return(
-                        <div className="px-3" key={`${skill.technology_name} + rating`}>
+                        <div className="px-5" key={`${skill.technology_name} + rating`}>
                             <span>{skill.technology_name}</span>
                             <span> : {skill.technology_rating}</span>
                         </div>
