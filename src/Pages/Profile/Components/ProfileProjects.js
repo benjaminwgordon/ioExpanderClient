@@ -61,11 +61,11 @@ const ProfileProjects = (props) => {
                 {
                     !projects
                     ? <LoadingSpinner />
-                    : <div className="lg:w-1/3 overflow-y-scroll">
+                    : <div className=" w-full lg:w-1/3 overflow-y-scroll">
                         {projects.map(project => {
                             return(
                                 <div key={project.project_name} className="py-1">
-                                    <div onClick={() => selectProject(project.project_id)} className="flex flex-row">
+                                    <div onClick={() => selectProject(project.project_id)} className="flex flex-row ">
                                         <div className="w-1/6 text-center px-4 mt-auto mb-auto">
                                             <TemplateIcon className="w-8 h-8"/>
                                         </div>

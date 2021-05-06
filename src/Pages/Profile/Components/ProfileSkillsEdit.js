@@ -95,7 +95,7 @@ const ProfileSkillsEdit = (props) => {
                             value={newSkillTechnologyName} 
                             onChange={(e)=>{setNewSkillTechnologyName(e.target.value)}}
                             placeholder="Technology name"
-                            className={'border text-md p-1 border-gray-400 ' + (NewSkillTechnologyNameRecommendation.length > 1 ? "rounded-tl-md" : "rounded-l-md")}
+                            className={'block lg:hidden border text-md p-1 border-gray-400 ' + (NewSkillTechnologyNameRecommendation.length > 1 ? "rounded-tl-md" : "rounded-l-md")}
                             autoComplete="off"
                             ref={dropDownRef}
                             onClick={()=>{
@@ -103,6 +103,16 @@ const ProfileSkillsEdit = (props) => {
                                 const yOffset = window.pageYOffset
                                 window.scrollTo({top: topPos + yOffset - 100, behavior:'smooth'})
                             }}
+                        />
+                        <input 
+                            name="newSkillTechnologyName"
+                            type="text" 
+                            value={newSkillTechnologyName} 
+                            onChange={(e)=>{setNewSkillTechnologyName(e.target.value)}}
+                            placeholder="Technology name"
+                            className={'hidden lg:block border text-md p-1 border-gray-400 ' + (NewSkillTechnologyNameRecommendation.length > 1 ? "rounded-tl-md" : "rounded-l-md")}
+                            autoComplete="off"
+                            ref={dropDownRef}
                         />
                         {
                             NewSkillTechnologyNameRecommendation.length > 1 &&

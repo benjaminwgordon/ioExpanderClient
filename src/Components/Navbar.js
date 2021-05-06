@@ -47,6 +47,7 @@ const Navbar = () => {
     }
 
     return (
+        authContext.user.token &&
         <Disclosure as="nav" className="bg-gray-800 sticky top-0 z-20">
         {({ open }) => (
             <>
@@ -107,7 +108,7 @@ const Navbar = () => {
             {
                 showNotifications &&
                 <div className="absolute min-h-screen w-screen top-0 left-0" onClick={(e) => {setShowNotifications(false)}}>
-                    <div className="absolute top-10 right-0">
+                    <div className="absolute top-10 right-4">
                         <Notifications />
                     </div>
                 </div> 
