@@ -40,7 +40,7 @@ const ProfileProjects = (props) => {
     }
 
     return (
-        <div >
+        <div>
            <div className="flex justify-between px-2 py-2 border-b border-gray-400 w-full">
                 <h3 className="font-bold text-xl ">
                     Projects

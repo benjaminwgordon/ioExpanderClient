@@ -1,95 +1,75 @@
 import React, {useState, useEffect, useContext} from 'react'
 import query from '../query'
 import AuthorizationContext from '../authenticationContext'
-import Project from './Project'
-import NewProjectForm from '../Components/NewProjectForm'
 import ProjectDetail from '../Pages/ProjectDetail'
 import SlideUpWindow from '../Components/SlideUpWindow'
 import Page from '../Components/Page'
-import Button from './Profile/Components/Button'
 import LoadingSpinner from '../Components/LoadingSpinner'
+import { TemplateIcon } from '@heroicons/react/outline'
 
-const Projects = () => {
+const Projects = (props) => {
     const token = useContext(AuthorizationContext).user.token
     
-    const [targetProjectId, setTargetProjectId] = useState(null)
     const [projects, setProjects] = useState([])
     const [showCreateForm, setShowCreateForm] = useState(false)
-    const [error, setError] = useState(true)
-    const [showDetails, setShowDetails] = useState(false)
+    const [showProjectDetail, setShowProjectDetail] = useState(false)
+    const [targetProject, setTargetProject] = useState(null)
 
 
     useEffect(()=>{
         const fetchProjects = async () => {
             const res = await query.get('/projects', token)
             if (res.error){
-                setError(true)
                 return
             }
-            setError(false)
             setProjects(res.projects)
             console.log(res.projects)
         }
         fetchProjects()
     }, [token])
-    
-    const toggleShowCreateForm = () => {
-        setShowCreateForm(!showCreateForm)
-    } 
 
-    const updateProjects = (newProject) => {
-        setProjects([...projects, newProject])
-        setShowCreateForm(false)
-        setError(false)
-    }
-
-    const selectProject = (projectId) => {
-        setTargetProjectId(projectId)
-        setShowDetails(true)
+    const selectProject = (project_id) => {
+        setShowProjectDetail(true)
+        setTargetProject(project_id)
     }
     
     return (
         <Page>
-            <div className="justify-center">
-                <div className="text-center">
-                    <Button onClick={toggleShowCreateForm}>
-                        Create New Project
-                    </Button>
-                    <SlideUpWindow isShowing={showCreateForm} setIsShowing={setShowCreateForm}>
-                        <NewProjectForm onSuccess={newProject => updateProjects(newProject)} onFailure={()=>{}}/>
-                    </SlideUpWindow>
-                    <h2>Top Projects</h2>
-                </div>   
-                <div className="flex justify-center py-6 px-0 lg:px-8">
-                    <div className="grid grid-cols-1 lg:grid-cols-3 lg:gap-10 justify-evenly w-full">
-                        <div className="flex flex-col">
-                            {
-                                error 
-                                ? <LoadingSpinner /> 
-                                : projects.length > 0 &&
-                                <ul className="rounded-sm border shadow-md divide-y-2 bg-white">
-                                    {projects.map(project => {
-                                        return(
-                                            <Project
-                                                project_description={project.project_description}
-                                                project_id={project.project_id}
-                                                project_name={project.project_name}
-                                                key={project.project_id}
-                                                selectProject={selectProject}
-                                            />
-                                        )
-                                    })}
-                                </ul>
-                            }
-                        </div>
-                        <div className="col-span-2">
-                            <SlideUpWindow isShowing={showDetails} setIsShowing={setShowDetails} >
-                                <ProjectDetail projectId={targetProjectId} />
+            <div>
+                <div className="flex justify-between px-2 py-2 border-b border-gray-400 w-full">
+                        <h3 className="font-bold text-xl ">
+                            Projects
+                        </h3>
+                    </div>
+                    <div className="flex flex-row">
+                        {
+                            !projects
+                            ? <LoadingSpinner />
+                            : <div className="lg:w-1/3 overflow-y-scroll">
+                                {projects.map(project => {
+                                    return(
+                                        <div key={project.project_name} className="py-1">
+                                            <div onClick={() => selectProject(project.project_id)} className="flex flex-row">
+                                                <div className="w-1/6 text-center px-4 mt-auto mb-auto">
+                                                    <TemplateIcon className="w-8 h-8"/>
+                                                </div>
+                                                <div className="w-full">
+                                                    <h4 className="font-bold">{project.project_name}</h4>
+                                                    <p className="font-light border-b-2 text-sm pb-1 pr-2">{project.project_description}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )
+                                })}
+                            </div>
+                        }
+                        <div className="lg:w-2/3 overflow-y-scroll">
+                            <SlideUpWindow isShowing={showProjectDetail} setIsShowing={setShowProjectDetail}>
+                                <ProjectDetail projectId={targetProject} close={() => setShowProjectDetail(false)}/>
                             </SlideUpWindow>
                         </div>
                     </div>
                 </div>
-            </div>
         </Page>
     )
 }

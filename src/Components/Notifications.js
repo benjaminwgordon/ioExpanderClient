@@ -3,6 +3,7 @@ import React, {useState, useEffect, useContext} from 'react'
 import authenticationContext from '../authenticationContext'
 
 import query from '../query'
+import SlideUpWindow from './SlideUpWindow'
 
 const Notifications = () => {
 
@@ -37,11 +38,11 @@ const Notifications = () => {
 
     return (
         <div>
-            {
-                notifications &&
-                <div className="w-screen flex justify-end ">
-                    <div className="w-3/4 lg:w-1/4 flex flex-col bg-gray-100 items-start">
+            {/* <SlideUpWindow showing={} setIsShowing={} windowTitle="Notifications"> */}
+                <div className="w-screen flex justify-end">
+                    <div className="mt-6 w-3/4 lg:w-1/4 flex flex-col bg-gray-100 items-start border-r border-l border-b border-gray-400 rounded-b-sm">
                         {
+                            notifications ?
                             notifications.map(notification => {
                                 console.log({notification})
                                 const issueDate = new Date(notification.contributor_request_issue_date).toLocaleDateString()
@@ -64,10 +65,13 @@ const Notifications = () => {
                                     </div>  
                                 )
                             })
+                            :<div>
+                                <p className="p-2">No Notifications</p>
+                            </div>
                         }
                     </div>
                 </div>
-            }
+            {/* </SlideUpWindow> */}
         </div>
     )
 }
