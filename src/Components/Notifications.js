@@ -3,6 +3,7 @@ import React, {useState, useEffect, useContext} from 'react'
 import authenticationContext from '../authenticationContext'
 
 import query from '../query'
+import LoadingSpinner from './LoadingSpinner'
 import SlideUpWindow from './SlideUpWindow'
 
 const Notifications = () => {
@@ -42,8 +43,11 @@ const Notifications = () => {
                 <div className="w-screen flex justify-end">
                     <div className="mt-6 w-3/4 lg:w-1/4 flex flex-col bg-gray-100 items-start border-r border-l border-b border-gray-400 rounded-b-sm">
                         {
-                            notifications ?
-                            notifications.map(notification => {
+                            notifications === null
+                            ? <LoadingSpinner />
+                            : (
+                                notifications.length > 0
+                                ? notifications.map(notification => {
                                 console.log({notification})
                                 const issueDate = new Date(notification.contributor_request_issue_date).toLocaleDateString()
 
@@ -63,11 +67,11 @@ const Notifications = () => {
                                             </button>
                                         </div>
                                     </div>  
-                                )
-                            })
-                            :<div>
-                                <p className="p-2">No Notifications</p>
-                            </div>
+                                )})
+                                : <div>
+                                    <p>No Nofitications Found</p>
+                                </div>  
+                            )                       
                         }
                     </div>
                 </div>
