@@ -18,7 +18,7 @@ const Profile = () => {
     const [isOwnedProfile, setIsOwnedProfile] = useState(false)
     const [showUserActionsMenu, setShowUserActionsMenu] = useState(false)
 
-    let targetUserId = useParams().id
+    let targetUserId = useParams().user_id
     if (!targetUserId){
         targetUserId = user_id
     }
@@ -26,18 +26,16 @@ const Profile = () => {
 
     useEffect(()=>{
         const fetchData = async () => {
-            return await query.get(`/users/${targetUserId}`, token)
+            const res = await query.get(`/users/${targetUserId}`, token)
+            if (res.error){
+                console.error(res.error)
+                setTargetUserData(null)
+                setIsOwnedProfile(false)   
+            }
+            setTargetUserData(res)
+            setIsOwnedProfile(res.user_id === user_id)
         }
         fetchData()
-            .then(res=>{
-                if (res){
-                    setTargetUserData(res.user)
-                    setIsOwnedProfile(res.user.user_id === user_id)
-                }else{
-                    setTargetUserData(null)
-                }
-            }
-        )
     }, [token, targetUserId, user_id])
 
     const toggleUserActionsMenu = () => {

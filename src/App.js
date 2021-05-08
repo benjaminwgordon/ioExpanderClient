@@ -18,7 +18,7 @@ function App() {
           {/* only render navbar when not on login */}
           <Navbar /> 
           <Switch>
-            <ProtectedRoute path="/users/:id" component={Profile} />
+            <ProtectedRoute path="/users/:user_id" component={Profile} />
             <ProtectedRoute path="/users" component={Users} />
             <ProtectedRoute path="/projects" component={Projects} />
             <ProtectedRoute path="/home" component={Home} />
