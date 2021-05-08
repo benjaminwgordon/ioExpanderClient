@@ -1,4 +1,5 @@
 import React, {useState, useEffect, useContext} from 'react'
+import {Link} from 'react-router-dom'
 import authenticationContext from '../authenticationContext'
 import ProfileSkillsDetails from '../Pages/Profile/Components/ProfileSkillsDetails'
 import query from '../query'
@@ -33,7 +34,7 @@ const UserDetail = (props) => {
             setSkillData(result.usersSkills)
         }
         fetchSkillData()
-    }, [token])
+    }, [token, userId])
 
 
     return (
@@ -41,7 +42,9 @@ const UserDetail = (props) => {
         ? <LoadingSpinner/>
         : 
         <div className="p-1">
-            <h4 className="p-1 text-2xl font-bold">{userData.username.charAt(0).toUpperCase() + userData.username.slice(1)}</h4>
+            <Link to={`/users/${userData.user_id}`}>
+                <h4 className="p-1 text-2xl font-bold">{userData.username.charAt(0).toUpperCase() + userData.username.slice(1)}</h4>
+            </Link>
             <div className="p-1">
                 <h4 className="p-2 text-lg font-bold">Skills</h4>
                 <ProfileSkillsDetails skills={skillData}/>
