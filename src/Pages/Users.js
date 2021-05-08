@@ -47,7 +47,6 @@ const Users = () => {
                 return(null)
             }
             setUsers(users)
-            return users
         }
         fetchUsers()
     }, [token])
@@ -66,6 +65,7 @@ const Users = () => {
                             ? <LoadingSpinner />
                             : <div className="w-full lg:w-1/3 overflow-y-scroll">
                                 {users.map(user => {
+                                    console.log(user)
                                     return(
                                         <div key={user.username} className="py-1">
                                             <div onClick={() => selectUser(user.user_id)} className="flex flex-row">
@@ -82,11 +82,15 @@ const Users = () => {
                                 })}
                             </div>
                         }
-                        <div className="lg:w-2/3 overflow-y-scroll">
-                            <SlideUpWindow isShowing={showUserDetail} setIsShowing={setShowUserDetail}>
-                                <UserDetail userId={targetUser} close={() => setShowUserDetail(false)}/>
-                            </SlideUpWindow>
-                        </div>
+                        {
+                            targetUser &&
+                            <div className="lg:w-2/3 overflow-y-scroll">
+                                <SlideUpWindow isShowing={showUserDetail} setIsShowing={setShowUserDetail}>
+                                    <UserDetail userId={targetUser} close={() => setShowUserDetail(false)}/>
+                                </SlideUpWindow>
+                            </div>
+                        }
+                        
                     </div>
                 </div>
         </Page>

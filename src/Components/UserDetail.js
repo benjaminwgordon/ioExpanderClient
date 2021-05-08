@@ -18,6 +18,7 @@ const UserDetail = (props) => {
                 console.error(result.error)
                 setUserData(null)
             }
+            console.log(result)
             setUserData(result)
         }
         fetchUserData()
