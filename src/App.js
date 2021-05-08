@@ -8,6 +8,7 @@ import Navbar from './Components/Navbar'
 import Profile from './Pages/Profile/Profile'
 import Projects from './Pages/Projects'
 import Home from './Pages/Home'
+import Users from './Pages/Users'
 
 function App() {
   return (
@@ -17,7 +18,7 @@ function App() {
           {/* only render navbar when not on login */}
           <Navbar /> 
           <Switch>
-            <ProtectedRoute path="/users/:id?" component={Profile} />
+            <ProtectedRoute path="/users" component={Users} />
             <ProtectedRoute path="/projects" component={Projects} />
             <ProtectedRoute path="/home" component={Home} />
             <Route component={Auth} />

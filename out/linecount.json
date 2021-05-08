@@ -1,0 +1,227 @@
+{
+    "extension": "linecount",
+    "version": "0.1.7",
+    "workspace": "/home/ben/code/ioexpander/ioexpanderclient",
+    "linecount": [
+        {
+            "version": "0.1.7",
+            "counttime": "2021-05-06 17:41:40",
+            "filesum": 35,
+            "codesum": 1258,
+            "commentsum": 49,
+            "blanksum": 202,
+            "filelist": [
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": ".env.development"
+                },
+                {
+                    "blank": 0,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "craco.config.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 19,
+                    "comment": 23,
+                    "filename": "public/index.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 8,
+                    "comment": 0,
+                    "filename": "public/manifest.json"
+                },
+                {
+                    "blank": 32,
+                    "code": 38,
+                    "comment": 12,
+                    "filename": "README.md"
+                },
+                {
+                    "blank": 5,
+                    "code": 26,
+                    "comment": 0,
+                    "filename": "src/App.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 6,
+                    "comment": 0,
+                    "filename": "src/authenticationContext.js"
+                },
+                {
+                    "blank": 6,
+                    "code": 28,
+                    "comment": 0,
+                    "filename": "src/AuthenticationContextWrapper.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "src/Components/LoadingSpinner.js"
+                },
+                {
+                    "blank": 16,
+                    "code": 125,
+                    "comment": 0,
+                    "filename": "src/Components/Navbar.js"
+                },
+                {
+                    "blank": 10,
+                    "code": 76,
+                    "comment": 1,
+                    "filename": "src/Components/NewProjectForm.js"
+                },
+                {
+                    "blank": 14,
+                    "code": 67,
+                    "comment": 2,
+                    "filename": "src/Components/Notifications.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 13,
+                    "comment": 0,
+                    "filename": "src/Components/Page.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 17,
+                    "comment": 0,
+                    "filename": "src/Components/ProtectedRoute.js"
+                },
+                {
+                    "blank": 5,
+                    "code": 32,
+                    "comment": 0,
+                    "filename": "src/Components/SlideUpWindow.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "src/index.css"
+                },
+                {
+                    "blank": 2,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "src/index.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 13,
+                    "comment": 0,
+                    "filename": "src/ioExpanderLogo.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 17,
+                    "comment": 0,
+                    "filename": "src/ioExpanderLogoWithText.svg"
+                },
+                {
+                    "blank": 5,
+                    "code": 15,
+                    "comment": 0,
+                    "filename": "src/Pages/Auth.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 9,
+                    "comment": 0,
+                    "filename": "src/Pages/Home.js"
+                },
+                {
+                    "blank": 5,
+                    "code": 25,
+                    "comment": 0,
+                    "filename": "src/Pages/Login.jsx"
+                },
+                {
+                    "blank": 4,
+                    "code": 13,
+                    "comment": 0,
+                    "filename": "src/Pages/Profile/Components/Button.js"
+                },
+                {
+                    "blank": 9,
+                    "code": 83,
+                    "comment": 0,
+                    "filename": "src/Pages/Profile/Components/ProfileProjects.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 9,
+                    "comment": 0,
+                    "filename": "src/Pages/Profile/Components/ProfileSection.js"
+                },
+                {
+                    "blank": 9,
+                    "code": 47,
+                    "comment": 0,
+                    "filename": "src/Pages/Profile/Components/ProfileSkills.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 22,
+                    "comment": 0,
+                    "filename": "src/Pages/Profile/Components/ProfileSkillsDetails.js"
+                },
+                {
+                    "blank": 14,
+                    "code": 147,
+                    "comment": 5,
+                    "filename": "src/Pages/Profile/Components/ProfileSkillsEdit.js"
+                },
+                {
+                    "blank": 8,
+                    "code": 78,
+                    "comment": 0,
+                    "filename": "src/Pages/Profile/Profile.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": "src/Pages/Project.js"
+                },
+                {
+                    "blank": 5,
+                    "code": 29,
+                    "comment": 0,
+                    "filename": "src/Pages/ProjectDetail.js"
+                },
+                {
+                    "blank": 7,
+                    "code": 70,
+                    "comment": 0,
+                    "filename": "src/Pages/Projects.js"
+                },
+                {
+                    "blank": 9,
+                    "code": 91,
+                    "comment": 0,
+                    "filename": "src/Pages/Register.js"
+                },
+                {
+                    "blank": 6,
+                    "code": 63,
+                    "comment": 0,
+                    "filename": "src/query.js"
+                },
+                {
+                    "blank": 6,
+                    "code": 27,
+                    "comment": 6,
+                    "filename": "tailwind.config.js"
+                }
+            ]
+        }
+    ]
+}
