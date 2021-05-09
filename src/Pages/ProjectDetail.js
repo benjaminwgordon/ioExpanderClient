@@ -3,6 +3,7 @@ import query from '../query'
 import authorizationContext from '../authenticationContext'
 import {Link} from 'react-router-dom'
 import LoadingSpinner from '../Components/LoadingSpinner'
+import ProjectContributors from './ProjectContributors'
 
 const ProjectDetail = (props) => {
 
@@ -26,6 +27,7 @@ const ProjectDetail = (props) => {
                     <h3 className="font-extrabold text-2xl">{projectData.project_name}</h3>
                     <p className="">{projectData.project_description}</p>
                     Owner: <Link to={`/users/${projectData.project_owner_id}`}><span>{projectData.project_owner_username}</span></Link>
+                    <ProjectContributors projectId={projectData.project_id} />
                 </div>
             </div>
     )

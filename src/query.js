@@ -60,9 +60,33 @@ const deleteRequest = async (target, token) => {
     }
 }
 
+const put = async (target, body, token) => {
+    console.log({target, body, token})
+    const res = await fetch(
+        process.env.REACT_APP_IOEXPANDER_API_URL + target,
+        {
+            method:"PUT",
+            body: JSON.stringify(body),
+            headers: {
+                'Content-Type': 'application/json',
+                'x-access-token': token
+            }
+        }
+    )
+    console.log(res)
+    if (!res.ok){
+        return({error:res.status})
+    }
+
+    const resJson =  await res.json()
+    console.log("res:", resJson)
+    return resJson
+}
+
 const query = {
     get,
     post,
+    put,
     deleteRequest
 }
 

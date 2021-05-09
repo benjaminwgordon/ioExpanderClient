@@ -1,6 +1,5 @@
 import React, {useState, useEffect, useContext} from 'react'
 import authenticationContext from '../authenticationContext'
-import {useParams} from 'react-router-dom'
 import query from '../query'
 
 import Page from '../Components/Page'
@@ -15,27 +14,12 @@ const Users = () => {
 
     const token = useContext(authenticationContext).user.token
     const [users, setUsers] = useState(null)
-    const params = useParams()
-    const [error, setError] = useState(null)
     const [showUserDetail, setShowUserDetail] = useState(true)
     const [targetUser, setTargetUser] = useState(null)
-
-    useEffect(()=>{
-        console.log({params})
-    }, [])
-
-
 
     const selectUser = (user_id) => {
         setTargetUser(user_id)
         setShowUserDetail(true)
-    }
-
-
-
-    const fetchSingleUser = async () => {
-        // fetch specific user profile for id
-
     }
 
     useEffect(()=>{
@@ -43,7 +27,6 @@ const Users = () => {
             // fetch all users
             const users = await query.get('/users', token)
             if (users.error){
-                setError(users.error)
                 return(null)
             }
             setUsers(users)

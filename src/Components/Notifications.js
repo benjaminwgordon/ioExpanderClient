@@ -22,18 +22,29 @@ const Notifications = () => {
                 console.log(res.error)
                 return
             } 
-            console.log(res.contributor_requests)
             setNotifications(res.contributor_requests)
         }
         fetchNotifications()
     }, [token])
 
-    const handleNotificationDecline = () => {
-
+    const handleNotificationDecline = async (contributor_request_id) => {
+        const res = await query.put(`/contributor_requests/${contributor_request_id}`, {accept: false}, token)
+        if(res.error){
+            console.error(res.error)
+            return
+        }
+        const updatedNotif = notifications.filter(notification => notification.contributor_request_id !== contributor_request_id)
+        console.log(updatedNotif)
+        setNotifications(updatedNotif)
     }
 
-    const handleNotificationAccept = () => {
-        
+    const handleNotificationAccept = async (contributor_request_id) => {
+        const res = await query.put(`/contributor_requests/${contributor_request_id}`, {accept: true}, token)
+        if(res.error){
+            console.error(res.error)
+            return
+        }
+        setNotifications(notifications.filter(notification => notification.contributor_request_id !== contributor_request_id))
     }
 
 
@@ -48,10 +59,7 @@ const Notifications = () => {
                             : (
                                 notifications.length > 0
                                 ? notifications.map(notification => {
-                                console.log({notification})
                                 const issueDate = new Date(notification.contributor_request_issue_date).toLocaleDateString()
-
-                                console.log(issueDate)
                                 return(
                                     <div className="p-2 flex flex-row justify-between w-full">
                                         <div>
