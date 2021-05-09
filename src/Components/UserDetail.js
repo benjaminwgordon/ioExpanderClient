@@ -45,27 +45,32 @@ const UserDetail = (props) => {
         !userData 
         ? <LoadingSpinner/>
         : 
-        <div className="p-1 flex flex-row">
-            <div className="">
-                <UserCircleIcon className="w-24 h-24" />
-            </div>
-            <div className="">
+        <div className="p-1 flex flex-row justify-between">
+            <div className="flex flex-row justify-start">
                 <Link to={`/users/${userData.user_id}`}>
-                    <h4 className="p-1 text-2xl font-bold">{userData.username.charAt(0).toUpperCase() + userData.username.slice(1)}</h4>
+                    <UserCircleIcon className="w-24 h-24" />
                 </Link>
-                <div className="pl-2">
-                    {
-                        skillData &&
-                        <div>
-                            <p>
-                            {
-                                skillData.sort((a,b)=> b.technology_rating - a.technology_rating).slice(0,5).map(skill => skill.technology_name).join(", ")
-                            }
-                            </p>
-                        </div>
-                    }
+                <div className="">
+                    <Link to={`/users/${userData.user_id}`}>
+                        <h4 className="p-1 text-2xl font-bold">{userData.username.charAt(0).toUpperCase() + userData.username.slice(1)}</h4>
+                    </Link>
+                    <div className="pl-2">
+                        {
+                            skillData &&
+                            <div>
+                                <p>
+                                {
+                                    skillData.sort((a,b)=> b.technology_rating - a.technology_rating).slice(0,5).map(skill => skill.technology_name).join(", ")
+                                }
+                                </p>
+                            </div>
+                        }
+                    </div>
                 </div>
             </div>
+            <Link to={`/users/${userData.user_id}`} className="p-1 rounded-md bg-green-300 text-white h-auto my-auto hover:bg-green-400">
+                View Profile
+            </Link>
         </div>
     )
 }

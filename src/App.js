@@ -9,6 +9,7 @@ import Profile from './Pages/Profile/Profile'
 import Projects from './Pages/Projects'
 import Home from './Pages/Home'
 import Users from './Pages/Users'
+import ContributorInvitation from './Pages/ContributorInvitation';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             <ProtectedRoute path="/users" component={Users} />
             <ProtectedRoute path="/projects" component={Projects} />
             <ProtectedRoute path="/home" component={Home} />
+            <ProtectedRoute path="/contributor_invitation" component={ContributorInvitation} />
             <Route component={Auth} />
           </Switch>
       </AuthenticationContextWrapper>

@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useState} from 'react'
 import query from '../../query'
 import authenticationContext from '../../authenticationContext'
-import {useParams} from 'react-router-dom'
+import {useParams, Link} from 'react-router-dom'
 
 import ProfileSkills from './Components/ProfileSkills'
 import ProfileProjects from './Components/ProfileProjects'
@@ -52,18 +52,18 @@ const Profile = () => {
                         <h1 className="font-bold text-3xl p-2">{targetUserData.username.charAt(0).toUpperCase() + targetUserData.username.slice(1)}</h1>
                         <div className="">
                             <div className="right-0 top-2 flex flex-col md:flex-row-reverse items-end ">
-                                <button className="" onClick={toggleUserActionsMenu}>
-                                    <PlusCircleIcon className="w-8 h-8 text-green-400"/>
-                                </button>
+                                {
+                                    !isOwnedProfile &&
+                                    <button className="" onClick={toggleUserActionsMenu}>
+                                        <PlusCircleIcon className="w-8 h-8 text-green-400"/>
+                                    </button>
+                                    }
                                 {
                                     showUserActionsMenu &&
                                     <>
-                                        <button onClick={()=>{}} className="m-1 p-2 text-sm bg-green-400 text-white rounded-md">
+                                        <Link to={`/contributor_invitation?user_id=${targetUserData.user_id}`} className="m-auto p-1 bg-green-300 hover:bg-green-400 text-white rounded-md">
                                             Invite to Contribute
-                                        </button>
-                                        <button onClick={()=>{}} className="m-1 p-2 text-sm bg-green-400 text-white rounded-md">
-                                            Add Connection
-                                        </button>
+                                        </Link>
                                     </>
                                 }
                             </div>
