@@ -4,10 +4,14 @@ import authenticationContext from '../authenticationContext'
 import ProfileSkillsDetails from '../Pages/Profile/Components/ProfileSkillsDetails'
 import query from '../query'
 import LoadingSpinner from './LoadingSpinner'
+import ProfileProjects from '../Pages/Profile/Components/ProfileProjects'
+import { UserCircleIcon } from '@heroicons/react/outline'
 
 const UserDetail = (props) => {
 
-    const token = useContext(authenticationContext).user.token
+    const context = useContext(authenticationContext)
+    const token = context.user.token
+    const auth_user_id = context.user.user_id
     const {userId} = props
     const [userData, setUserData] = useState(null)
     const [skillData, setSkillData] = useState(null)
@@ -41,26 +45,27 @@ const UserDetail = (props) => {
         !userData 
         ? <LoadingSpinner/>
         : 
-        <div className="p-1">
-            <Link to={`/users/${userData.user_id}`}>
-                <h4 className="p-1 text-2xl font-bold">{userData.username.charAt(0).toUpperCase() + userData.username.slice(1)}</h4>
-            </Link>
-            <div className="p-1">
-                <h4 className="p-2 text-lg font-bold">Skills</h4>
-                <ProfileSkillsDetails skills={skillData}/>
+        <div className="p-1 flex flex-row">
+            <div className="">
+                <UserCircleIcon className="w-24 h-24" />
             </div>
-            {/* <div>
-                {
-                    skillData &&
-                    skillData.map(skill => {
-                        return(
-                            <div className="">
-
-                            </div>
-                        )
-                    })
-                }
-            </div> */}
+            <div className="">
+                <Link to={`/users/${userData.user_id}`}>
+                    <h4 className="p-1 text-2xl font-bold">{userData.username.charAt(0).toUpperCase() + userData.username.slice(1)}</h4>
+                </Link>
+                <div className="pl-2">
+                    {
+                        skillData &&
+                        <div>
+                            <p>
+                            {
+                                skillData.sort((a,b)=> b.technology_rating - a.technology_rating).slice(0,5).map(skill => skill.technology_name).join(", ")
+                            }
+                            </p>
+                        </div>
+                    }
+                </div>
+            </div>
         </div>
     )
 }
