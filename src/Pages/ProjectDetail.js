@@ -25,6 +25,9 @@ const ProjectDetail = (props) => {
             <div className="min-h-screen w-full bg-white shadow-md">
                 <div className="px-4 py-6 bg-gray-50">
                     <h3 className="font-extrabold text-2xl">{projectData.project_name}</h3>
+                    <Link to={`/projects/${projectData.project_id}`}>
+                        View Project
+                    </Link>
                     <p className="">{projectData.project_description}</p>
                     Owner: <Link to={`/users/${projectData.project_owner_id}`}><span>{projectData.project_owner_username}</span></Link>
                     <ProjectContributors projectId={projectData.project_id} />

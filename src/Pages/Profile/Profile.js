@@ -8,7 +8,7 @@ import ProfileProjects from './Components/ProfileProjects'
 import ProfileSection from './Components/ProfileSection'
 import Page from '../../Components/Page'
 import LoadingSpinner from '../../Components/LoadingSpinner'
-import { PlusCircleIcon } from '@heroicons/react/outline'
+import { PlusCircleIcon, UserCircleIcon } from '@heroicons/react/outline'
 import SlideUpWindow from '../../Components/SlideUpWindow'
 
 const Profile = () => {
@@ -49,7 +49,10 @@ const Profile = () => {
                 ? <LoadingSpinner/>
                 :<div className="min-h-screen w-full divide-y-8">
                     <div className="flex flex-row justify-between items-center">
-                        <h1 className="font-bold text-3xl p-2">{targetUserData.username.charAt(0).toUpperCase() + targetUserData.username.slice(1)}</h1>
+                        <div className="flex flex-row items-center">
+                            <UserCircleIcon className="w-24 h-24"/>
+                            <h1 className="font-bold text-3xl p-2">{targetUserData.username.charAt(0).toUpperCase() + targetUserData.username.slice(1)}</h1>
+                        </div>
                         <div className="">
                             <div className="right-0 top-2 flex flex-col md:flex-row-reverse items-end ">
                                 {

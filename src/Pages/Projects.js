@@ -6,6 +6,7 @@ import SlideUpWindow from '../Components/SlideUpWindow'
 import Page from '../Components/Page'
 import LoadingSpinner from '../Components/LoadingSpinner'
 import { TemplateIcon } from '@heroicons/react/outline'
+import {Link} from 'react-router-dom'
 
 const Projects = (props) => {
     const token = useContext(AuthorizationContext).user.token
@@ -22,8 +23,7 @@ const Projects = (props) => {
             if (res.error){
                 return
             }
-            setProjects(res.projects)
-            console.log(res.projects)
+            setProjects(res)
         }
         fetchProjects()
     }, [token])
