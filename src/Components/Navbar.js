@@ -26,7 +26,7 @@ const Navbar = () => {
 
     useEffect(() => {
         setNavigation([
-            {name: 'home', to:"/home", current:location.pathname.indexOf("/home") !== -1},
+            // {name: 'home', to:"/home", current:location.pathname.indexOf("/home") !== -1},
             {name: 'users', to:"/users", current:location.pathname.indexOf("/users") !== -1},
             {name: 'projects', to:"/projects", current:location.pathname.indexOf("/projects") !== -1}
         ])
