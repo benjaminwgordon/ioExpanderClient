@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from 'react'
+import React, {useState, useEffect, useContext, useRef} from 'react'
 import query from '../query'
 import AuthorizationContext from '../authenticationContext'
 import ProjectDetail from '../Pages/ProjectDetail'
@@ -15,7 +15,7 @@ const Projects = (props) => {
     const [showCreateForm, setShowCreateForm] = useState(false)
     const [showProjectDetail, setShowProjectDetail] = useState(false)
     const [targetProject, setTargetProject] = useState(null)
-
+    const ref = useRef(null)
 
     useEffect(()=>{
         const fetchProjects = async () => {
@@ -28,14 +28,23 @@ const Projects = (props) => {
         fetchProjects()
     }, [token])
 
+    useEffect(()=>{
+        if (projects && projects[0]){
+            setTargetProject(projects[0].project_id)
+            if (ref.current.clientWidth > 1040){
+                setShowProjectDetail(true)
+            }
+        }
+    }, [projects])
+
     const selectProject = (project_id) => {
         setShowProjectDetail(true)
         setTargetProject(project_id)
     }
     
     return (
-        <Page>
-            <div>
+        <Page >
+            <div ref={ref}>
                 <div className="flex justify-between px-2 py-2 border-b border-gray-400 w-full">
                         <h3 className="font-bold text-xl ">
                             Projects
@@ -45,7 +54,7 @@ const Projects = (props) => {
                         {
                             !projects
                             ? <LoadingSpinner />
-                            : <div className="lg:w-1/3 overflow-y-scroll">
+                            : <div className="w-full lg:w-1/3 overflow-y-scroll">
                                 {projects.map(project => {
                                     return(
                                         <div key={project.project_name} className="py-1">

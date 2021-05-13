@@ -51,13 +51,12 @@ const Users = () => {
                                     console.log(user)
                                     return(
                                         <div key={user.username} className="py-1">
-                                            <div onClick={() => selectUser(user.user_id)} className="flex flex-row">
-                                                <div className="w-1/6 text-center px-4 mt-auto mb-auto">
+                                            <div onClick={() => selectUser(user.user_id)} className="py-1 flex flex-row">
+                                                <div className="w-1/6 text-center px-4 mb-auto">
                                                     <TemplateIcon className="w-8 h-8"/>
                                                 </div>
                                                 <div className="w-full">
-                                                    <h4 className="font-bold">{user.username}</h4>
-                                                    {/* <p className="font-light border-b-2 text-sm pb-1 pr-2">{user.tagline}</p> */}
+                                                    <h4 className="h-full text-lg font-bold border-b-2 text-sm pb-2 pr-2">{user.username}</h4>
                                                 </div>
                                             </div>
                                         </div>
