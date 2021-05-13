@@ -58,7 +58,7 @@ const Users = () => {
                             ? <LoadingSpinner />
                             : <div className="w-full lg:w-1/3 overflow-y-scroll">
                                 {users.map(user => {
-                                    const isActiveUser = (user.user_id == targetUser)
+                                    const isActiveUser = (user.user_id === targetUser)
                                     console.log({isActiveUser})
                                     return(
                                         <div key={user.username} className="py-1">
