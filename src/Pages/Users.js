@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from 'react'
+import React, {useState, useEffect, useContext, useRef} from 'react'
 import authenticationContext from '../authenticationContext'
 import query from '../query'
 
@@ -16,6 +16,7 @@ const Users = () => {
     const [users, setUsers] = useState(null)
     const [showUserDetail, setShowUserDetail] = useState(true)
     const [targetUser, setTargetUser] = useState(null)
+    const ref = useRef(null)
 
     const selectUser = (user_id) => {
         setTargetUser(user_id)
@@ -34,9 +35,18 @@ const Users = () => {
         fetchUsers()
     }, [token])
 
+    useEffect(()=>{
+        if (users && users[0]){
+            setTargetUser(users[0].user_id)
+            if (ref.current.clientWidth > 1040){
+                setShowUserDetail(true)
+            }
+        }
+    }, [users])
+
     return (
         <Page>
-            <div>
+            <div ref={ref}>
                 <div className="flex justify-between px-2 py-2 border-b border-gray-400 w-full">
                         <h3 className="font-bold text-xl ">
                             Users
@@ -48,10 +58,11 @@ const Users = () => {
                             ? <LoadingSpinner />
                             : <div className="w-full lg:w-1/3 overflow-y-scroll">
                                 {users.map(user => {
-                                    console.log(user)
+                                    const isActiveUser = (user.user_id == targetUser)
+                                    console.log({isActiveUser})
                                     return(
                                         <div key={user.username} className="py-1">
-                                            <div onClick={() => selectUser(user.user_id)} className="py-1 flex flex-row">
+                                            <div onClick={() => selectUser(user.user_id)} className={`py-1 flex flex-row ${isActiveUser && "bg-blue-100"}`}>
                                                 <div className="w-1/6 text-center px-4 mb-auto">
                                                     <TemplateIcon className="w-8 h-8"/>
                                                 </div>

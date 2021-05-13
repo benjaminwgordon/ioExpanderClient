@@ -56,8 +56,9 @@ const Projects = (props) => {
                             ? <LoadingSpinner />
                             : <div className="w-full lg:w-1/3 overflow-y-scroll">
                                 {projects.map(project => {
+                                    const isActiveProject = (project.project_id === targetProject)
                                     return(
-                                        <div key={project.project_name} className="py-1">
+                                        <div key={project.project_name} className={`py-1 ${isActiveProject && "bg-blue-100"}`}>
                                             <div onClick={() => selectProject(project.project_id)} className="flex flex-row">
                                                 <div className="w-1/6 text-center px-4 mt-auto mb-auto">
                                                     <TemplateIcon className="w-8 h-8"/>
