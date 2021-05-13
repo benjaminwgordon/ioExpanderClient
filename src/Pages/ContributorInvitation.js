@@ -3,7 +3,7 @@ import authenticationContext from '../authenticationContext'
 import query from '../query'
 import Page from '../Components/Page'
 import {useHistory, useLocation} from 'react-router-dom'
-import { PlusCircleIcon, UserCircleIcon } from '@heroicons/react/outline'
+import { DotsCircleHorizontalIcon, PlusCircleIcon, UserCircleIcon } from '@heroicons/react/outline'
 
 const ContributorInvitation = () => {
 
@@ -19,6 +19,7 @@ const ContributorInvitation = () => {
     const [ownedProjects, setOwnedProjects] = useState(null)
     const [targetUser, setTargetUser] = useState(null)
     const [targetProject, setTargetProject] = useState(null)
+    const [existingContributorRequests, setExistingContributorRequests] = useState(null)
 
     useEffect(()=>{
         // Handle optional presets for user id and project id
@@ -41,8 +42,14 @@ const ContributorInvitation = () => {
         }        
         fetchOwnedProjects()
         const fetchExistingContributorRequests = async () => {
-            const res = await query.get(`/contributor_requests?issuer_id=${user_id}`)
-        }
+            const res = await query.get(`/contributor_requests?issuer_id=${user_id}`, token)
+            if (res.error){
+                console.error(res.error)
+                return
+            }
+            setExistingContributorRequests(res)
+        } 
+        fetchExistingContributorRequests()
     },[targetUser, targetProject])
 
     const handleInviteSubmit = async (e, project_id) => {
@@ -56,17 +63,31 @@ const ContributorInvitation = () => {
 
     return (
         <Page>
-            <div className="p-2">
-                <form className="flex flex-col items-center">
+            <div className="p-2 w-full">
+                <h2 className="text-xl font-bold">Your Projects</h2>
+                <form className="flex flex-col">
                     {
-                        ownedProjects && 
+                        ownedProjects && existingContributorRequests &&
                         ownedProjects.map(project => {
+
+                            const hasExistingInvitation = existingContributorRequests.some(request => {
+                                return request.project_id === project.project_id
+                            })
+                            console.log({hasExistingInvitation})
+
                             return(
-                                <div className="">
-                                    <h4>{project.project_name}</h4>
-                                    <button onClick={(e)=> handleInviteSubmit(e, project.project_id)}>
-                                        <PlusCircleIcon className="w-8 h-8"/>
-                                    </button>
+                                <div className="p-4 flex flex-row w-full justify-between">
+                                    <div>
+                                        <h4 className="font-bold">{project.project_name}</h4>
+                                        <p className="px-4 font-light ">{project.project_description}</p>
+                                    </div>
+                                    {
+                                        hasExistingInvitation 
+                                        ?<div>Already Invited</div>
+                                        :<button onClick={(e)=> handleInviteSubmit(e, project.project_id)}>
+                                            <PlusCircleIcon className="w-8 h-8"/>
+                                        </button>
+                                    }
                                 </div>
                             )
                         })

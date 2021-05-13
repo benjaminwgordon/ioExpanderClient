@@ -45,7 +45,7 @@ const UserDetail = (props) => {
         !userData 
         ? <LoadingSpinner/>
         : 
-        <div className="p-1 flex flex-row justify-between">
+        <div className="p-1 px-6 flex flex-row justify-between">
             <div className="flex flex-row justify-start">
                 <Link to={`/users/${userData.user_id}`}>
                     <UserCircleIcon className="w-24 h-24" />
