@@ -1,21 +1,32 @@
 import React, {useState, useContext} from 'react'
 import query from '../query'
 import authenticationContext from '../authenticationContext'
+import {useHistory} from 'react-router-dom'
+
 const Login = (props) => {
 
     const {toggleLoginRegister} = props
 
     const user = useContext(authenticationContext)
-
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const history = useHistory()
+    const [error, setError] = useState("")
 
     const handleLoginSubmit = async (e) => {
         e.preventDefault()
         setPassword("")
         const res = await query.post("/auth/login", {email, password})
+        if (res.error){
+            setError("Incorrect Credentials")
+            return
+        }
+        setError("")
         if (res.token){
             user.updateUser(res.username, res.user_id, res.token)
+        } 
+        if (!res.verifiedEmail){
+            history.push('/signup/emailVerification')
         }
     }
 
@@ -62,6 +73,10 @@ const Login = (props) => {
                     <button cursor="pointer" type="submit" className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                         Submit
                     </button>
+                    {
+                        error && 
+                        <p className="text-red-600 text-center">{error}</p>
+                    }
                 </form>
             </div>
         </div>

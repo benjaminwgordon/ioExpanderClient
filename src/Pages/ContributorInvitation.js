@@ -21,6 +21,9 @@ const ContributorInvitation = () => {
     const [targetProject, setTargetProject] = useState(null)
     const [existingContributorRequests, setExistingContributorRequests] = useState(null)
 
+    //this is an antipattern, will address later
+    const [forceUpdate, setForceUpdate] = useState(0)
+
     useEffect(()=>{
         // Handle optional presets for user id and project id
         console.log({queryParams})
@@ -50,7 +53,7 @@ const ContributorInvitation = () => {
             setExistingContributorRequests(res)
         } 
         fetchExistingContributorRequests()
-    },[targetUser, targetProject])
+    },[targetUser, targetProject, forceUpdate])
 
     const handleInviteSubmit = async (e, project_id) => {
         e.preventDefault()
@@ -58,7 +61,7 @@ const ContributorInvitation = () => {
         if (res.error){
             return
         }
-        history.push(`/projects/${project_id}`)
+        setForceUpdate(forceUpdate + 1)
     }
 
     return (
@@ -84,8 +87,8 @@ const ContributorInvitation = () => {
                                     {
                                         hasExistingInvitation 
                                         ?<div>Already Invited</div>
-                                        :<button onClick={(e)=> handleInviteSubmit(e, project.project_id)}>
-                                            <PlusCircleIcon className="w-8 h-8"/>
+                                        :<button onClick={(e)=> handleInviteSubmit(e, project.project_id)} className="p-2 rounded-md bg-green-400 hover:bg-green-500 text-white">
+                                            Invite
                                         </button>
                                     }
                                 </div>

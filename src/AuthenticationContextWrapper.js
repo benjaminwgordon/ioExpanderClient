@@ -12,19 +12,12 @@ const AuthenticationContextWrapper = (props) => {
         token:null
     })
 
-    useEffect(() => {
-        if (!user.token){
-            console.log({user})
-            history.push("/login")
-        }
-    }, [user, history])
-
     return (
         <authenticationContext.Provider value={{
             user:user, 
             updateUser:(username, user_id, token)=>{
                 setUser({username, user_id, token})
-                history.push("/home")
+                history.push(`/users/${user_id}`)
             }}}>
             {props.children}
         </authenticationContext.Provider>

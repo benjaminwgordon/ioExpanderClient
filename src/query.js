@@ -16,7 +16,7 @@ const get = async (target, token) => {
 }
 
 const post = async (target, body, token) => {
-    console.log({target, body, token})
+    console.log({target:process.env.REACT_APP_IOEXPANDER_API_URL + target, body, token})
     const res = await fetch(
         process.env.REACT_APP_IOEXPANDER_API_URL + target,
         {

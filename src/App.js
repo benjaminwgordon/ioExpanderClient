@@ -1,7 +1,6 @@
 import React from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 
-import Auth from './Pages/Auth'
 import AuthenticationContextWrapper from './AuthenticationContextWrapper'
 import ProtectedRoute from './Components/ProtectedRoute'
 import Navbar from './Components/Navbar'
@@ -11,6 +10,9 @@ import Home from './Pages/Home'
 import Users from './Pages/Users'
 import Project from './Pages/Project'
 import ContributorInvitation from './Pages/ContributorInvitation';
+import EmailVerification from './Components/EmailVerification'
+import Login from './Pages/Login'
+import Register from './Pages/Register'
 
 function App() {
   return (
@@ -20,13 +22,15 @@ function App() {
           {/* only render navbar when not on login */}
           <Navbar /> 
           <Switch>
+            <Route path="/login" component={Login} />
+            <Route path="/register" component={Register} />
+            <Route path="/signup/emailVerification" component={EmailVerification} />
             <ProtectedRoute path="/users/:user_id" component={Profile} />
             <ProtectedRoute path="/users" component={Users} />
             <ProtectedRoute path="/projects/:project_id" component={Project} />
             <ProtectedRoute path="/projects" component={Projects} />
             <ProtectedRoute path="/home" component={Home} />
             <ProtectedRoute path="/contributor_invitation" component={ContributorInvitation} />
-            <Route component={Auth} />
           </Switch>
       </AuthenticationContextWrapper>
     </Router>

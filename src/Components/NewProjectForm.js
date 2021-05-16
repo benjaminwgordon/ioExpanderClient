@@ -1,6 +1,7 @@
 import React, {useState, useContext} from 'react'
 import query from '../query'
 import AuthorizationContext from '../authenticationContext'
+import {useHistory} from 'react-router-dom'
 
 const NewProjectForm = (props) => {
 
@@ -10,6 +11,7 @@ const NewProjectForm = (props) => {
     const [projectName, setProjectName] = useState("")
     const [projectDescription, setProjectDescription] = useState("")
     const [error, setError] = useState("")
+    const history = useHistory()
 
     const submitNewProject = async (e) => {
         e.preventDefault()
@@ -19,7 +21,10 @@ const NewProjectForm = (props) => {
         }, token)
         if (res.insertedProject){ 
             setError("")
-            onSuccess(res.insertedProject)
+            if (onSuccess){
+                onSuccess(res.insertedProject)
+            }
+            history.push(`/projects/${res.insertedProject.project_id}`)
         } else{
             switch(res.error){
                 case 400:
@@ -34,7 +39,7 @@ const NewProjectForm = (props) => {
             }
 
             //handles any request failure behavior that the parent component needs access to
-            onFailure()
+            if (onFailure){onFailure()}
         }
         
     }

@@ -1,6 +1,7 @@
 import React, {useState, useContext} from 'react'
 import query from '../query'
 import authenticationContext from '../authenticationContext'
+import {useHistory} from 'react-router-dom'
 
 const Register = (props) => {
 
@@ -12,18 +13,16 @@ const Register = (props) => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [error, setError] = useState("")
+    const history = useHistory()
 
     const handleRegisterSubmit = async (e) => {
         e.preventDefault()
-        setPassword("")
         const res = await query.post("/auth/register", {username, email, password})
+        setPassword("")
         if (res.error === 409){
             setError("Credentials already in use")
-        } else{
-            setError("")
-        }
-        if (res.token){
-            user.updateUser(username, res.user_id, res.token)
+        } else {
+            history.push('/signup/emailVerification')
         }
     }
 
