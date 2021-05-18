@@ -1,6 +1,7 @@
 import React, {useState, useEffect, useContext} from 'react'
 import {useLocation, useHistory} from 'react-router-dom'
 import authenticationContext from '../authenticationContext';
+import Page from './Page';
 
 const EmailVerification = () => {
     
@@ -37,6 +38,7 @@ const EmailVerification = () => {
                 }
             }
         )
+        console.log({status:res.status})
         if (res.status !== 200){
             setError("failed to authenticate")
             return
@@ -55,18 +57,20 @@ const EmailVerification = () => {
     }
 
     return (
-        <div>
-            <p>Please wait a moment while we process your email verification</p>
-            {
-                error &&
-                <div>
-                    <p>Your verification email timed out</p>
-                    <button className="p-1 bg-green-400 text-white rounded-md" onClick={()=>history.push('/register')}>
-                        Click here to submit registration again
-                    </button>
-                </div>
-            }
-        </div>
+        <Page>
+            <div className="w-full min-h-screen flex flex-col justify-center items-center">
+                {
+                    !error 
+                    ?<p>Please wait a moment while we process your email verification</p>
+                    :<div className="flex flex-col justify-center items-center">
+                        <p>Your verification email timed out or is invalid</p>
+                        <button className="m-1 p-1 bg-green-400 text-white rounded-md" onClick={()=>history.push('/register')}>
+                            Click here to submit registration again
+                        </button>
+                    </div>
+                }
+            </div>
+        </Page>
     )
 }
 
