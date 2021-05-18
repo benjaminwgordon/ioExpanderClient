@@ -14,10 +14,12 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "react-spinners-css": "^2.0.1",
+    "serve": "^11.3.2",
     "web-vitals": "^1.1.1"
   },
   "scripts": {
-    "start": "craco start",
+    "dev-start": "craco start",
+    "start": "serve -s build",
     "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject"
