@@ -1,19 +1,18 @@
-import React, {useState, useContext} from 'react'
+import React, {useState} from 'react'
 import query from '../query'
-import authenticationContext from '../authenticationContext'
 import {useHistory} from 'react-router-dom'
 
 const Register = (props) => {
-
-    const {toggleLoginRegister} = props
-
-    const user = useContext(authenticationContext)
 
     const [username, setUsername] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [error, setError] = useState("")
     const history = useHistory()
+
+    const toggleLoginRegister = () => {
+        history.push('/login')
+    }
 
     const handleRegisterSubmit = async (e) => {
         e.preventDefault()
@@ -22,7 +21,7 @@ const Register = (props) => {
         if (res.error === 409){
             setError("Credentials already in use")
         } else {
-            history.push('/signup/emailVerification')
+            history.push('/register/confirmation')
         }
     }
 

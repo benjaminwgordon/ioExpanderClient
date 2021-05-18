@@ -2,7 +2,7 @@ import React, {useState, useEffect, useContext} from 'react'
 import {Link, useLocation} from 'react-router-dom'
 
 import { Disclosure} from '@headlessui/react'
-import { BellIcon, MenuIcon, UserAddIcon, UserIcon, XIcon } from '@heroicons/react/outline'
+import { BellIcon, MenuIcon, UserIcon, XIcon } from '@heroicons/react/outline'
 
 import ioExpanderLogo from '../ioExpanderLogo.svg'
 import ioExpanderLogoWithText from '../ioExpanderLogoWithText.svg'
@@ -16,13 +16,13 @@ const Navbar = () => {
     const authContext = useContext(authenticationContext)
     const [showNotifications, setShowNotifications] = useState(false)
 
-    const logout = () => {
-        authContext.updateUser({
-            username:null,
-            user_id:null,
-            token:null}
-        )
-    }
+    // const logout = () => {
+    //     authContext.updateUser({
+    //         username:null,
+    //         user_id:null,
+    //         token:null}
+    //     )
+    // }
 
     useEffect(() => {
         setNavigation([

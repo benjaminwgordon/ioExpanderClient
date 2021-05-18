@@ -13,6 +13,7 @@ import ContributorInvitation from './Pages/ContributorInvitation';
 import EmailVerification from './Components/EmailVerification'
 import Login from './Pages/Login'
 import Register from './Pages/Register'
+import RegistrationSubmissionConfirmation from './Components/RegistrationSubmissionConfirmation';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Navbar /> 
           <Switch>
             <Route path="/login" component={Login} />
+            <Route path="/register/confirmation" component={RegistrationSubmissionConfirmation} />
             <Route path="/register" component={Register} />
             <Route path="/signup/emailVerification" component={EmailVerification} />
             <ProtectedRoute path="/users/:user_id" component={Profile} />

@@ -5,13 +5,16 @@ import {useHistory} from 'react-router-dom'
 
 const Login = (props) => {
 
-    const {toggleLoginRegister} = props
-
     const user = useContext(authenticationContext)
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const history = useHistory()
     const [error, setError] = useState("")
+    const history = useHistory()
+
+
+    const toggleLoginRegister = () => {
+        history.push('/register')
+    }
 
     const handleLoginSubmit = async (e) => {
         e.preventDefault()
